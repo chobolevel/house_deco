@@ -1,44 +1,98 @@
-plugins {
-    id("org.springframework.boot") version "3.3.1"
-    id("io.spring.dependency-management") version "1.1.5"
-    kotlin("plugin.jpa") version "1.9.24"
-    kotlin("jvm") version "1.9.24"
-    kotlin("plugin.spring") version "1.9.24"
-}
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-group = "com.chobolevel"
-version = "0.0.1-SNAPSHOT"
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-repositories {
+buildscript {
+  repositories {
     mavenCentral()
+  }
+  dependencies {
+    classpath(kotlin("gradle-plugin", version = "1.8.10"))
+  }
+}
+
+group = "com.movieland"
+version = "0.0.1-SNAPSHOT"
+java.sourceCompatibility = JavaVersion.VERSION_17
+
+plugins {
+  val kotlinVersion = "1.8.21"
+  kotlin("jvm") version kotlinVersion
+  kotlin("kapt") version kotlinVersion apply false
+  kotlin("plugin.spring") version kotlinVersion apply false
+  kotlin("plugin.jpa") version kotlinVersion apply false
+  id("org.springframework.boot") version "3.1.0" apply false
+  id("io.spring.dependency-management") version "1.1.0"
+  id("org.flywaydb.flyway") version "7.13.0" apply false
+  id("org.jlleitschuh.gradle.ktlint") version "11.3.1" apply false
+  id("org.jlleitschuh.gradle.ktlint-idea") version "11.3.1"
+}
+
+// 프로젝트에 있는 모든 모듈 관리
+allprojects {
+  apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+  repositories {
+    mavenCentral()
+  }
+
+  ktlint {
+    filter {
+      exclude("*.kts")
+      exclude("**/generated/**")
+    }
+  }
+}
+
+// 프로젝트 하위에 있는 모듈 관리
+subprojects {
+  apply(plugin = "kotlin")
+  apply(plugin = "jacoco")
+  apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+  apply(plugin = "org.springframework.boot")
+  apply(plugin = "io.spring.dependency-management")
+
+  val kotestVersion = "5.5.5"
+  val jacksonVersion = "2.14.2"
+
+  java.sourceCompatibility = JavaVersion.VERSION_17
+
+  ext {
+    set("springBootVersion", "3.1.0")
+  }
+
+  dependencies {
+    // starter
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // jackson
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
+    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+
+    // 코틀린 내장 기능 외의 고수준 API 사용하기 위해 의존성 추가
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+    // test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.kotest:kotest-runner-junit5:${kotestVersion}")
+    testImplementation("io.kotest:kotest-assertions-core:${kotestVersion}")
+    testImplementation("io.kotest:kotest-property:${kotestVersion}")
+    testImplementation("io.kotest:kotest-framework-datatest:${kotestVersion}")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
+    testImplementation("io.mockk:mockk:1.13.4")
+  }
+
+  tasks.withType<KotlinCompile> {
+    kotlinOptions {
+      freeCompilerArgs = listOf("-Xjsr305=strict")
+      jvmTarget = "17"
+    }
+  }
+
+  tasks.withType<Test> {
+    useJUnitPlatform()
+  }
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    runtimeOnly("com.mysql:mysql-connector-j")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.springframework.security:spring-security-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
+  implementation(kotlin("stdlib"))
 }

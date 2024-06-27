@@ -1,1 +1,2 @@
-rootProject.name = "movieland"
+rootProject.name = "movie-land"
+include("api", "domain")

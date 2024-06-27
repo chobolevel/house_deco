@@ -1,13 +1,12 @@
-package com.chobolevel.movieland
+package com.movieland.api
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MovielandApplicationTests {
+class ApiApplicationTests {
 
-    @Test
-    fun contextLoads() {
-    }
-
+  @Test
+  fun contextLoads() {
+  }
 }

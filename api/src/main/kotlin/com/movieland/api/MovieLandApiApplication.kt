@@ -1,11 +1,11 @@
-package com.chobolevel.movieland
+package com.movieland.api
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MovielandApplication
+class MovieLandApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<MovielandApplication>(*args)
+  runApplication<MovieLandApiApplication>(*args)
 }
