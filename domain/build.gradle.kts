@@ -25,6 +25,9 @@ dependencies {
   api("org.springframework.boot:spring-boot-starter-data-jpa")
   api("org.springframework.boot:spring-boot-actuator-autoconfigure")
 
+  // web
+  implementation("org.springframework.boot:spring-boot-starter-web")
+
   // envers
   implementation("org.springframework.data:spring-data-envers")
 
