@@ -14,6 +14,8 @@ data class CreateUserRequestDto(
   val socialId: String?,
   @field:NotBlank(message = "회원 타입은 필수 값입니다.")
   val loginType: UserLoginType,
+  @field:NotBlank(message = "닉네임은 필수 값입니다.")
+  val nickname: String,
   @field:NotBlank(message = "전화번호는 필수 값입니다.")
   val phone: String,
 )

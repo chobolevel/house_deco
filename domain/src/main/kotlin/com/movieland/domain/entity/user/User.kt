@@ -31,6 +31,8 @@ class User(
   @Column(nullable = false)
   var loginType: UserLoginType? = null,
   @Column(nullable = false)
+  var nickname: String? = null,
+  @Column(nullable = false)
   var phone: String? = null,
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)

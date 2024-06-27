@@ -18,7 +18,7 @@ spring:
         hibernate:
           envers:
             revision_field_name: rev_id
-            audit_table_prefix: _histories
+            audit_table_suffix: _histories
             store_data_at_delete: true
     generate-ddl: false
     hibernate:
