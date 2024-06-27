@@ -23,5 +23,4 @@ class Audit {
   @LastModifiedDate
   var updatedAt: LocalDateTime? = null
     protected set
-
 }

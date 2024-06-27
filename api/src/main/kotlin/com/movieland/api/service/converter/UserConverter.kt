@@ -18,5 +18,4 @@ class UserConverter(
       id = tsidFactory.create().toString()
     )
   }
-
 }

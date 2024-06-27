@@ -21,5 +21,4 @@ class RevInfo {
 
   @RevisionTimestamp
   var revstmp: Long? = null
-
 }

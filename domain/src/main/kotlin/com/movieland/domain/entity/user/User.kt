@@ -39,7 +39,6 @@ class User(
 
   @Column(nullable = false)
   var deleted: Boolean? = false
-
 }
 
 enum class UserLoginType {

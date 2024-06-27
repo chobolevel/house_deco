@@ -34,5 +34,4 @@ class UserCustomRepository : QuerydslRepositorySupport(User::class.java) {
       .where(*predicates.toTypedArray())
       .fetchCount()
   }
-
 }

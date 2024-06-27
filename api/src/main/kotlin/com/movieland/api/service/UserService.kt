@@ -16,5 +16,4 @@ class UserService(
   fun create(request: CreateUserRequestDto): String {
     return ""
   }
-
 }

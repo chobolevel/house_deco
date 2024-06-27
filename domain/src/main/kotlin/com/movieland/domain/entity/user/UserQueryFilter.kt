@@ -12,5 +12,4 @@ data class UserQueryFilter(
       username?.let { user.username.eq(it) }
     )
   }
-
 }
