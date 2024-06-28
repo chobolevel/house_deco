@@ -4,12 +4,12 @@ import com.movieland.domain.entity.user.QUser.user
 import com.querydsl.core.types.dsl.BooleanExpression
 
 data class UserQueryFilter(
-  val username: String?,
+    val email: String?,
 ) {
 
-  fun toPredicates(): List<BooleanExpression> {
-    return listOfNotNull(
-      username?.let { user.username.eq(it) }
-    )
-  }
+    fun toPredicates(): List<BooleanExpression> {
+        return listOfNotNull(
+            email?.let { user.email.eq(it) }
+        )
+    }
 }

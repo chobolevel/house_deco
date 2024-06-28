@@ -14,11 +14,11 @@ import org.hibernate.envers.RevisionTimestamp
 @Table(name = "rev_info")
 class RevInfo {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @RevisionNumber
-  var rev: Long? = null
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @RevisionNumber
+    var rev: Long? = null
 
-  @RevisionTimestamp
-  var revstmp: Long? = null
+    @RevisionTimestamp
+    var revstmp: Long? = null
 }

@@ -14,5 +14,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 class MovieLandApiApplication
 
 fun main(args: Array<String>) {
-  runApplication<MovieLandApiApplication>(*args)
+    runApplication<MovieLandApiApplication>(*args)
 }

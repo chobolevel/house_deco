@@ -14,13 +14,13 @@ import java.time.LocalDateTime
 @Audited
 class Audit {
 
-  @Column(nullable = false)
-  @CreatedDate
-  var createdAt: LocalDateTime? = null
-    protected set
+    @Column(nullable = false)
+    @CreatedDate
+    var createdAt: LocalDateTime? = null
+        protected set
 
-  @Column(nullable = false)
-  @LastModifiedDate
-  var updatedAt: LocalDateTime? = null
-    protected set
+    @Column(nullable = false)
+    @LastModifiedDate
+    var updatedAt: LocalDateTime? = null
+        protected set
 }
