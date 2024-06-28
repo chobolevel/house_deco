@@ -10,7 +10,7 @@ create table movie_land.users
 (
   id         varchar(255) not null
     primary key,
-  username   varchar(255) not null,
+  email varchar(255) not null,
   password   varchar(255) not null,
   social_id  varchar(255) null,
   login_type varchar(80)  not null,
@@ -30,7 +30,7 @@ create table movie_land.users_histories
   id         varchar(255) not null,
   rev_id     bigint       not null,
   revtype    tinyint      not null,
-  username   varchar(255) not null,
+  email varchar(255) not null,
   password   varchar(255) not null,
   social_id  varchar(255) null,
   login_type varchar(80)  not null,

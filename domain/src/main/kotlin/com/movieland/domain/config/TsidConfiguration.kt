@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class TsidConfiguration {
 
-  @Bean
-  fun tsidFactory(): TsidFactory {
-    return TsidFactory()
-  }
+    @Bean
+    fun tsidFactory(): TsidFactory {
+        return TsidFactory()
+    }
 }

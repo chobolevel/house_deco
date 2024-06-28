@@ -18,42 +18,51 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Audited
 @Where(clause = "deleted = false")
 class User(
-  @Id
-  @Column(nullable = false, updatable = false)
-  var id: String? = null,
-  @Column(nullable = false)
-  var username: String? = null,
-  @Column(nullable = false)
-  var password: String? = null,
-  @Column
-  var socialId: String? = null,
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  var loginType: UserLoginType? = null,
-  @Column(nullable = false)
-  var nickname: String? = null,
-  @Column(nullable = false)
-  var phone: String? = null,
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  var role: UserRoleType? = null,
+    @Id
+    @Column(nullable = false, updatable = false)
+    var id: String? = null,
+    @Column(nullable = false)
+    var email: String? = null,
+    @Column(nullable = false)
+    var password: String? = null,
+    @Column
+    var socialId: String? = null,
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var loginType: UserLoginType? = null,
+    @Column(nullable = false)
+    var nickname: String? = null,
+    @Column(nullable = false)
+    var phone: String? = null,
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var role: UserRoleType? = null,
 ) : Audit() {
 
-  @Column(nullable = false)
-  var deleted: Boolean? = false
+    @Column(nullable = false)
+    var deleted: Boolean? = false
+
+    fun resign() {
+        this.deleted = true
+    }
 }
 
 enum class UserLoginType {
-  GENERAL,
-  KAKAO
+    GENERAL,
+    KAKAO
 }
 
 enum class UserRoleType {
-  ROLE_USER,
-  ROLE_ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
 
 enum class UserOrderType {
-  CREATED_AT_ASC,
-  CREATED_AT_DESC
+    CREATED_AT_ASC,
+    CREATED_AT_DESC
+}
+
+enum class UserUpdateMaskType {
+    NICKNAME,
+    PHONE
 }

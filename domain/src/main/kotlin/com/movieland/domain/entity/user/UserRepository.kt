@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, String> {
 
-  fun existsByUsernameAndDeletedIsFalse(username: String): Boolean
+    fun existsByEmailAndDeletedIsFalse(email: String): Boolean
 
-  fun existsBySocialIdAndLoginType(socialId: String, loginType: UserLoginType): Boolean
+    fun existsByNicknameAndDeletedIsFalse(nickname: String): Boolean
 
-  fun existsByPhoneAndDeletedIsFalse(phone: String): Boolean
+    fun existsByPhoneAndDeletedIsFalse(phone: String): Boolean
 }
