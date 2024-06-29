@@ -38,3 +38,10 @@ open class ParameterInvalidException(
     override val message: String,
     override val throwable: Throwable? = null
 ) : CustomWarnException(errorCode, status, message, throwable)
+
+open class UnAuthorizedException(
+    override val errorCode: ErrorCode,
+    override val status: HttpStatus = HttpStatus.UNAUTHORIZED,
+    override val message: String,
+    override val throwable: Throwable? = null
+) : CustomWarnException(errorCode, status, message, throwable)

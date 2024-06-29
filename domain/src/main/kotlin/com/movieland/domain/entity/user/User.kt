@@ -36,7 +36,7 @@ class User(
     var phone: String? = null,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var role: UserRoleType? = null,
+    var role: UserRoleType = UserRoleType.ROLE_USER,
 ) : Audit() {
 
     @Column(nullable = false)
@@ -49,8 +49,16 @@ class User(
 
 enum class UserLoginType {
     GENERAL,
-    KAKAO
+    KAKAO;
+
+    // equal to java static method
+    companion object {
+        fun find(value: String): UserLoginType? {
+            return values().find { it.name == value }
+        }
+    }
 }
+
 
 enum class UserRoleType {
     ROLE_USER,

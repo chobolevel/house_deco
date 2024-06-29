@@ -1,10 +1,9 @@
-package com.movieland.api.service.converter
+package com.movieland.api.service.user.converter
 
 import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.UserResponseDto
 import com.movieland.domain.entity.user.User
-import com.movieland.domain.entity.user.UserLoginType
 import com.movieland.domain.entity.user.UserRoleType
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
@@ -36,7 +35,7 @@ class UserConverter(
             loginType = user.loginType!!,
             nickname = user.nickname!!,
             phone = user.phone!!,
-            role = user.role!!,
+            role = user.role,
             createdAt = user.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
             updatedAt = user.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
         )

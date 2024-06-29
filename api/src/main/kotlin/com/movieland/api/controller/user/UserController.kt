@@ -2,9 +2,10 @@ package com.movieland.api.controller.user
 
 import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.user.CreateUserRequestDto
+import com.movieland.api.dto.user.LoginRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
-import com.movieland.api.service.UserQueryCreator
-import com.movieland.api.service.UserService
+import com.movieland.api.service.user.UserQueryCreator
+import com.movieland.api.service.user.UserService
 import com.movieland.domain.entity.user.UserOrderType
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -36,6 +37,13 @@ class UserController(
         request: CreateUserRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = userService.createUser(request)
+        return ResponseEntity.ok(ResultResponse(result))
+    }
+
+    @Operation(summary = "유저 로그인 API")
+    @PostMapping("/users/login")
+    fun loginUser(@RequestBody request: LoginRequestDto): ResponseEntity<ResultResponse> {
+        val result = userService.login(request)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
