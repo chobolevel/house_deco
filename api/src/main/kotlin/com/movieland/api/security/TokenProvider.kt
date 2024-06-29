@@ -45,5 +45,4 @@ class TokenProvider(
             .compact()
         return JwtResponse(accessToken, refreshToken)
     }
-
 }

@@ -59,7 +59,6 @@ enum class UserLoginType {
     }
 }
 
-
 enum class UserRoleType {
     ROLE_USER,
     ROLE_ADMIN
