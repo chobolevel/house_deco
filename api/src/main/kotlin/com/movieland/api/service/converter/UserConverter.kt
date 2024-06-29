@@ -22,7 +22,7 @@ class UserConverter(
             email = request.email,
             password = passwordEncoder.encode(request.password),
             socialId = request.socialId,
-            loginType = UserLoginType.GENERAL,
+            loginType = request.loginType,
             nickname = request.nickname,
             phone = request.phone,
             role = UserRoleType.ROLE_USER
