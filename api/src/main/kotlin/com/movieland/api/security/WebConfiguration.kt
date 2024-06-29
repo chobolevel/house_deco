@@ -33,19 +33,14 @@ class WebConfiguration {
                             "Origin",
                             "Access-Control-Request-Method",
                             "Access-Control-Request-Headers",
-                            "Oh-My-Diving-Session-Data",
                             "Access-Control-Allow-Origin",
                             "Access-Control-Allow-Credentials",
-                            "refreshShopToken",
-                            "refreshUserToken",
                         )
                         exposedHeaders = listOf(
                             "Access-Control-Allow-Origin",
                             "Access-Control-Allow-Credentials",
                             "Authorization",
                             "Content-Disposition",
-                            "refreshShopToken",
-                            "refreshUserToken",
                             "Set-Cookie"
                         )
                         maxAge = 3600
@@ -56,6 +51,10 @@ class WebConfiguration {
         }
             .csrf { csrf -> csrf.disable() }
             .sessionManagement { sessionManagement ->
+                // Always -> spring security session fix
+                // If_Required -> spring security think required
+                // Never -> spring security not manage session
+                // Stateless -> when not use session(ex: JWT)
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .authorizeHttpRequests { authorizeRequests ->

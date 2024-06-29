@@ -15,6 +15,7 @@ class ExceptionHandler {
 
     private val logger = LoggerFactory.getLogger(ExceptionHandler::class.java)
 
+    // validation lib exception handler
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
         val errorCode = ErrorCode.INVALID_PARAMETER
@@ -22,6 +23,7 @@ class ExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(errorCode, message))
     }
 
+    // custom exception handler
     @ExceptionHandler(ParameterInvalidException::class)
     fun handleParameterInvalidException(e: ParameterInvalidException): ResponseEntity<ErrorResponse> {
         val errorCode = e.errorCode
