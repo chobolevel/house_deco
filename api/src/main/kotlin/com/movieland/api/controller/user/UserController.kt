@@ -1,10 +1,13 @@
 package com.movieland.api.controller.user
 
+import com.movieland.api.annorations.HasAuthorityAdmin
+import com.movieland.api.annorations.HasAuthorityUser
 import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.LoginRequestDto
 import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
+import com.movieland.api.security.UserDetailsImpl
 import com.movieland.api.service.user.UserQueryCreator
 import com.movieland.api.service.user.UserService
 import com.movieland.domain.entity.user.UserOrderType
@@ -12,6 +15,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -65,6 +69,7 @@ class UserController(
 
     @Operation(summary = "유저 목록 조회 API")
     @GetMapping("/users")
+    @HasAuthorityAdmin
     fun searchUser(
         @RequestParam(required = false) email: String?,
         @RequestParam(required = false) skipCount: Long?,
@@ -84,20 +89,34 @@ class UserController(
         return ResponseEntity.ok(ResultResponse(result))
     }
 
+    @Operation(summary = "유저 본인 프로필 조회 API")
+    @GetMapping("/users/me")
+    @HasAuthorityUser
+    fun me(@AuthenticationPrincipal userDetails: UserDetailsImpl): ResponseEntity<ResultResponse> {
+        val result = userService.fetchUser(userDetails.user.id!!)
+        return ResponseEntity.ok(ResultResponse(result))
+    }
+
     @Operation(summary = "유저 정보 수정 API")
     @PutMapping("/users/{id}")
+    @HasAuthorityUser
     fun updateUser(
         @PathVariable id: String,
-        @RequestBody request: UpdateUserRequestDto
+        @RequestBody request: UpdateUserRequestDto,
+        @AuthenticationPrincipal userDetails: UserDetailsImpl
     ): ResponseEntity<ResultResponse> {
-        val result = userService.updateUser(id, request)
+        val result = userService.updateUser(userDetails.user.id!!, request)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
     @Operation(summary = "유저 회원 탈퇴 API")
     @DeleteMapping("/users/{id}")
-    fun resignUser(@PathVariable id: String): ResponseEntity<ResultResponse> {
-        val result = userService.deleteUser(id)
+    @HasAuthorityUser
+    fun resignUser(
+        @PathVariable id: String,
+        @AuthenticationPrincipal userDetails: UserDetailsImpl
+    ): ResponseEntity<ResultResponse> {
+        val result = userService.deleteUser(userDetails.user.id!!)
         return ResponseEntity.ok(ResultResponse(result))
     }
 }
