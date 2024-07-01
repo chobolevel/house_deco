@@ -49,7 +49,7 @@ cloud:
     s3:
       bucket: "chobolevel"
     stack.auto: false
-    region.static: ap-northease-2
+    region.static: "ap-northease-2"
     credentials:
-      accessKey: AKIARUGQHO32SWIRERQ5
-      secretKey: 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
+      accessKey: "AKIARUGQHO32SWIRERQ5"
+      secretKey: "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"
