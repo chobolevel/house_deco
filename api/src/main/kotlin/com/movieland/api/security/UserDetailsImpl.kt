@@ -18,7 +18,7 @@ class UserDetailsImpl(
     }
 
     override fun getUsername(): String {
-        return user.email!!
+        return user.id!!
     }
 
     override fun isAccountNonExpired(): Boolean {

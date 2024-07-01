@@ -8,7 +8,6 @@ import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
 import com.movieland.api.dto.user.UserResponseDto
 import com.movieland.api.security.TokenProvider
-import com.movieland.api.security.UserDetailsImpl
 import com.movieland.api.service.user.converter.UserConverter
 import com.movieland.api.service.user.updater.UserUpdatable
 import com.movieland.domain.Pagination
@@ -20,7 +19,6 @@ import com.movieland.domain.entity.user.UserRepository
 import com.movieland.domain.exception.ErrorCode
 import com.movieland.domain.exception.ParameterInvalidException
 import com.movieland.domain.exception.PolicyException
-import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.stereotype.Service
@@ -37,8 +35,6 @@ class UserService(
     private val tokenProvider: TokenProvider,
     private val refreshTokenService: RefreshTokenService
 ) {
-
-    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Throws(ParameterInvalidException::class)
     fun createUser(request: CreateUserRequestDto): String {

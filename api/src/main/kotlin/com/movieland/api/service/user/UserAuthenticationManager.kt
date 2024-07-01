@@ -1,6 +1,5 @@
 package com.movieland.api.service.user
 
-import com.movieland.api.security.UserDetailsImpl
 import com.movieland.domain.entity.user.UserFinder
 import com.movieland.domain.entity.user.UserLoginType
 import com.movieland.domain.exception.ErrorCode
