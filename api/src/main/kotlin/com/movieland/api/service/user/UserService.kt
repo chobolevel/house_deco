@@ -8,7 +8,6 @@ import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
 import com.movieland.api.dto.user.UserResponseDto
 import com.movieland.api.security.TokenProvider
-import com.movieland.api.security.UserDetailsImpl
 import com.movieland.api.service.user.converter.UserConverter
 import com.movieland.api.service.user.updater.UserUpdatable
 import com.movieland.domain.Pagination
@@ -20,7 +19,6 @@ import com.movieland.domain.entity.user.UserRepository
 import com.movieland.domain.exception.ErrorCode
 import com.movieland.domain.exception.ParameterInvalidException
 import com.movieland.domain.exception.PolicyException
-import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.stereotype.Service
@@ -37,8 +35,6 @@ class UserService(
     private val tokenProvider: TokenProvider,
     private val refreshTokenService: RefreshTokenService
 ) {
-
-    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Throws(ParameterInvalidException::class)
     fun createUser(request: CreateUserRequestDto): String {
@@ -80,8 +76,7 @@ class UserService(
         }
         val authentication = authenticationManager.authenticate(authenticationToken)
         val result = tokenProvider.generateToken(authentication).also {
-            val userDetails = authentication.principal as UserDetailsImpl
-            refreshTokenService.setUserRefreshToken(userDetails.user.id!!, it.refreshToken)
+            refreshTokenService.setUserRefreshToken(authentication.name, it.refreshToken)
         }
         return result
     }
@@ -94,8 +89,7 @@ class UserService(
             message = "토근이 만료되었습니다. 재로그인 해주세요."
         )
         return tokenProvider.generateToken(authentication).also {
-            val userDetails = authentication.principal as UserDetailsImpl
-            refreshTokenService.setUserRefreshToken(userDetails.user.id!!, it.refreshToken)
+            refreshTokenService.setUserRefreshToken(authentication.name, it.refreshToken)
         }
     }
 

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.security.Principal
 
 @Tag(name = "User (회원)", description = "회원 관리 API")
 @RestController
@@ -92,8 +93,8 @@ class UserController(
     @Operation(summary = "유저 본인 프로필 조회 API")
     @GetMapping("/users/me")
     @HasAuthorityUser
-    fun me(@AuthenticationPrincipal userDetails: UserDetailsImpl): ResponseEntity<ResultResponse> {
-        val result = userService.fetchUser(userDetails.user.id!!)
+    fun me(principal: Principal): ResponseEntity<ResultResponse> {
+        val result = userService.fetchUser(principal.name)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
