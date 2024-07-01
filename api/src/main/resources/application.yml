@@ -20,6 +20,8 @@ spring:
             revision_field_name: rev_id
             audit_table_suffix: _histories
             store_data_at_delete: true
+      hibernate:
+        show_sql: true
     generate-ddl: false
     hibernate:
       ddl-auto: validate

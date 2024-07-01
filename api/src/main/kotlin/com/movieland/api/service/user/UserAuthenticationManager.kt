@@ -1,5 +1,6 @@
 package com.movieland.api.service.user
 
+import com.movieland.api.security.UserDetailsImpl
 import com.movieland.domain.entity.user.UserFinder
 import com.movieland.domain.entity.user.UserLoginType
 import com.movieland.domain.exception.ErrorCode
@@ -8,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
@@ -19,7 +19,7 @@ class UserAuthenticationManager(
     private val passwordEncoder: BCryptPasswordEncoder
 ) : AuthenticationManager {
 
-    @Throws(AuthenticationException::class, UnAuthorizedException::class)
+    @Throws(UnAuthorizedException::class, BadCredentialsException::class)
     override fun authenticate(authentication: Authentication): Authentication {
         val combine = authentication.name.split(",")
         val email = combine[0]
@@ -34,7 +34,7 @@ class UserAuthenticationManager(
             throw BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.")
         }
         val authorities = AuthorityUtils.createAuthorityList(findUser.role.name)
-        // TODO 꼭 첫번쨰 인자로 id만 하지 않아도 됨(객체도 가능함)
-        return UsernamePasswordAuthenticationToken(findUser.id, findUser.password, authorities)
+        val userDetails = UserDetailsImpl(findUser)
+        return UsernamePasswordAuthenticationToken(userDetails, findUser.password, authorities)
     }
 }

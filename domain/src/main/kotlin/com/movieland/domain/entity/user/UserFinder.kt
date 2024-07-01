@@ -34,6 +34,14 @@ class UserFinder(
     }
 
     @Throws(DataNotFoundException::class)
+    fun findByEmail(email: String): User {
+        return userRepository.findByEmail(email) ?: throw DataNotFoundException(
+            errorCode = ErrorCode.USER_IS_NOT_FOUND,
+            message = "회원 정보를 찾을 수 없습니다."
+        )
+    }
+
+    @Throws(DataNotFoundException::class)
     fun findByEmailAndLoginType(email: String, loginType: UserLoginType): User {
         return userRepository.findByEmailAndLoginType(email, loginType) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_IS_NOT_FOUND,

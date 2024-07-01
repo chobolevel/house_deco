@@ -1,5 +1,6 @@
 package com.movieland.api.security
 
+import com.movieland.api.service.user.UserAuthenticationManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -14,7 +15,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-class WebConfiguration {
+class WebConfiguration(
+    private val userAuthenticationManager: UserAuthenticationManager,
+    private val tokenProvider: TokenProvider
+) {
 
     @Bean
     @Throws(Exception::class)
@@ -63,7 +67,12 @@ class WebConfiguration {
                     .requestMatchers("/api/**").permitAll()
                     .anyRequest().permitAll()
             }
-//      .addFilter()
+            .addFilter(
+                JWTAuthorizationFilter(
+                    userAuthenticationManager = userAuthenticationManager,
+                    tokenProvider = tokenProvider
+                )
+            )
             .build()
     }
 }
