@@ -1,4 +1,4 @@
-package com.movieland.api.service
+package com.movieland.api.service.user
 
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.user.UserQueryFilter

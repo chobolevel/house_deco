@@ -1,4 +1,4 @@
-package com.movieland.api.service.updater
+package com.movieland.api.service.user.updater
 
 import com.movieland.api.dto.user.UpdateUserRequestDto
 import com.movieland.domain.entity.user.User

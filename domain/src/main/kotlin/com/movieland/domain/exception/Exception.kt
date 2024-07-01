@@ -25,6 +25,13 @@ open class CustomErrorException(
 
 // real custom exception
 
+open class UnAuthorizedException(
+    override val errorCode: ErrorCode,
+    override val status: HttpStatus = HttpStatus.UNAUTHORIZED,
+    override val message: String,
+    override val throwable: Throwable? = null
+) : CustomWarnException(errorCode, status, message, throwable)
+
 open class DataNotFoundException(
     override val errorCode: ErrorCode,
     override val status: HttpStatus = HttpStatus.NOT_FOUND,
@@ -33,6 +40,13 @@ open class DataNotFoundException(
 ) : CustomWarnException(errorCode, status, message, throwable)
 
 open class ParameterInvalidException(
+    override val errorCode: ErrorCode,
+    override val status: HttpStatus = HttpStatus.BAD_REQUEST,
+    override val message: String,
+    override val throwable: Throwable? = null
+) : CustomWarnException(errorCode, status, message, throwable)
+
+open class PolicyException(
     override val errorCode: ErrorCode,
     override val status: HttpStatus = HttpStatus.BAD_REQUEST,
     override val message: String,
