@@ -2,9 +2,11 @@ package com.movieland.api.controller.user
 
 import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.user.CreateUserRequestDto
+import com.movieland.api.dto.user.LoginRequestDto
+import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
-import com.movieland.api.service.UserQueryCreator
-import com.movieland.api.service.UserService
+import com.movieland.api.service.user.UserQueryCreator
+import com.movieland.api.service.user.UserService
 import com.movieland.domain.entity.user.UserOrderType
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -31,11 +33,33 @@ class UserController(
     @Operation(summary = "유저 회원 가입 API")
     @PostMapping("/users")
     fun createUser(
-        @RequestBody
         @Valid
+        @RequestBody
         request: CreateUserRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = userService.createUser(request)
+        return ResponseEntity.ok(ResultResponse(result))
+    }
+
+    @Operation(summary = "유저 로그인 API")
+    @PostMapping("/users/login")
+    fun loginUser(
+        @Valid
+        @RequestBody
+        request: LoginRequestDto
+    ): ResponseEntity<ResultResponse> {
+        val result = userService.login(request)
+        return ResponseEntity.ok(ResultResponse(result))
+    }
+
+    @Operation(summary = "유저 토큰 재발급 API")
+    @PostMapping("/users/reissue")
+    fun reissueUser(
+        @Valid
+        @RequestBody
+        request: ReissueRequestDto
+    ): ResponseEntity<ResultResponse> {
+        val result = userService.reissue(request)
         return ResponseEntity.ok(ResultResponse(result))
     }
 

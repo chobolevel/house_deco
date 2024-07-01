@@ -13,13 +13,6 @@ class UserFinder(
     private val userCustomRepository: UserCustomRepository
 ) {
 
-    fun findById(id: String): User {
-        return userCustomRepository.findById(id) ?: throw DataNotFoundException(
-            errorCode = ErrorCode.USER_IS_NOT_FOUND,
-            message = "회원 정보를 찾을 수 없습니다."
-        )
-    }
-
     fun existsByEmail(email: String): Boolean {
         return userRepository.existsByEmailAndDeletedIsFalse(email)
     }
@@ -30,6 +23,30 @@ class UserFinder(
 
     fun existsByPhone(phone: String): Boolean {
         return userRepository.existsByPhoneAndDeletedIsFalse(phone)
+    }
+
+    @Throws(DataNotFoundException::class)
+    fun findById(id: String): User {
+        return userCustomRepository.findById(id) ?: throw DataNotFoundException(
+            errorCode = ErrorCode.USER_IS_NOT_FOUND,
+            message = "회원 정보를 찾을 수 없습니다."
+        )
+    }
+
+    @Throws(DataNotFoundException::class)
+    fun findByEmail(email: String): User {
+        return userRepository.findByEmail(email) ?: throw DataNotFoundException(
+            errorCode = ErrorCode.USER_IS_NOT_FOUND,
+            message = "회원 정보를 찾을 수 없습니다."
+        )
+    }
+
+    @Throws(DataNotFoundException::class)
+    fun findByEmailAndLoginType(email: String, loginType: UserLoginType): User {
+        return userRepository.findByEmailAndLoginType(email, loginType) ?: throw DataNotFoundException(
+            errorCode = ErrorCode.USER_IS_NOT_FOUND,
+            message = "회원 정보를 찾을 수 없습니다."
+        )
     }
 
     fun searchByPredicates(

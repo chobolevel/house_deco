@@ -23,7 +23,7 @@ create table movie_land.users
 );
 
 create index users_username_login_type_index
-  on movie_land.users (username, login_type);
+  on movie_land.users (email, login_type);
 
 create table movie_land.users_histories
 (

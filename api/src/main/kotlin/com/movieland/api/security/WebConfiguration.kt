@@ -1,5 +1,6 @@
 package com.movieland.api.security
 
+import com.movieland.api.service.user.UserAuthenticationManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -14,7 +15,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-class WebConfiguration {
+class WebConfiguration(
+    private val userAuthenticationManager: UserAuthenticationManager,
+    private val tokenProvider: TokenProvider
+) {
 
     @Bean
     @Throws(Exception::class)
@@ -33,19 +37,14 @@ class WebConfiguration {
                             "Origin",
                             "Access-Control-Request-Method",
                             "Access-Control-Request-Headers",
-                            "Oh-My-Diving-Session-Data",
                             "Access-Control-Allow-Origin",
                             "Access-Control-Allow-Credentials",
-                            "refreshShopToken",
-                            "refreshUserToken",
                         )
                         exposedHeaders = listOf(
                             "Access-Control-Allow-Origin",
                             "Access-Control-Allow-Credentials",
                             "Authorization",
                             "Content-Disposition",
-                            "refreshShopToken",
-                            "refreshUserToken",
                             "Set-Cookie"
                         )
                         maxAge = 3600
@@ -56,6 +55,10 @@ class WebConfiguration {
         }
             .csrf { csrf -> csrf.disable() }
             .sessionManagement { sessionManagement ->
+                // Always -> spring security session fix
+                // If_Required -> spring security think required
+                // Never -> spring security not manage session
+                // Stateless -> when not use session(ex: JWT)
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .authorizeHttpRequests { authorizeRequests ->
@@ -64,7 +67,12 @@ class WebConfiguration {
                     .requestMatchers("/api/**").permitAll()
                     .anyRequest().permitAll()
             }
-//      .addFilter()
+            .addFilter(
+                JWTAuthorizationFilter(
+                    userAuthenticationManager = userAuthenticationManager,
+                    tokenProvider = tokenProvider
+                )
+            )
             .build()
     }
 }
