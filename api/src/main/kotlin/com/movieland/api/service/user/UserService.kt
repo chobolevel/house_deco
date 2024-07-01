@@ -80,8 +80,7 @@ class UserService(
         }
         val authentication = authenticationManager.authenticate(authenticationToken)
         val result = tokenProvider.generateToken(authentication).also {
-            val userDetails = authentication.principal as UserDetailsImpl
-            refreshTokenService.setUserRefreshToken(userDetails.user.id!!, it.refreshToken)
+            refreshTokenService.setUserRefreshToken(authentication.name, it.refreshToken)
         }
         return result
     }
@@ -94,8 +93,7 @@ class UserService(
             message = "토근이 만료되었습니다. 재로그인 해주세요."
         )
         return tokenProvider.generateToken(authentication).also {
-            val userDetails = authentication.principal as UserDetailsImpl
-            refreshTokenService.setUserRefreshToken(userDetails.user.id!!, it.refreshToken)
+            refreshTokenService.setUserRefreshToken(authentication.name, it.refreshToken)
         }
     }
 

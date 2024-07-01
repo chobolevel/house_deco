@@ -34,7 +34,6 @@ class UserAuthenticationManager(
             throw BadCredentialsException("아이디 또는 비밀번호가 올바르지 않습니다.")
         }
         val authorities = AuthorityUtils.createAuthorityList(findUser.role.name)
-        val userDetails = UserDetailsImpl(findUser)
-        return UsernamePasswordAuthenticationToken(userDetails, findUser.password, authorities)
+        return UsernamePasswordAuthenticationToken(findUser.id, findUser.password, authorities)
     }
 }
