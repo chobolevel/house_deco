@@ -6,6 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class PresignedResponseDto(
     val presignedUrl: String,
-    val key: String,
+    val originUrl: String,
     val filename: String
 )
