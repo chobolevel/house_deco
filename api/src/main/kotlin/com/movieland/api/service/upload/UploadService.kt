@@ -29,7 +29,7 @@ class UploadService(
         val url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest)
         return PresignedResponseDto(
             presignedUrl = url.toString(),
-            originUrl = "${url.protocol}://${url.host}/${url.path}",
+            originUrl = "${url.protocol}://${url.host}${url.path}",
             filename = filename
         )
     }

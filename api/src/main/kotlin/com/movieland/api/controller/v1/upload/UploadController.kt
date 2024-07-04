@@ -1,5 +1,6 @@
-package com.movieland.api.controller.upload
+package com.movieland.api.controller.v1.upload
 
+import com.movieland.api.annorations.HasAuthority
 import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.upload.CreatePresignedUrlRequestDto
 import com.movieland.api.service.upload.UploadService
@@ -18,10 +19,11 @@ class UploadController(
     private val uploadService: UploadService
 ) {
 
+    @HasAuthority
     @Operation(summary = "파일 업로드 Presigned Url 생성 API")
     @PostMapping("/upload/presigned-url")
     fun createPresignedUrl(@RequestBody request: CreatePresignedUrlRequestDto): ResponseEntity<ResultResponse> {
-        val result = uploadService.getPresignedUrl(request.prefix, request.filename)
+        val result = uploadService.getPresignedUrl(request.prefix.name, request.filename)
         return ResponseEntity.ok(ResultResponse(result))
     }
 }
