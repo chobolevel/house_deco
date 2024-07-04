@@ -43,3 +43,32 @@ create table movie_land.users_histories
   primary key (id, rev_id)
 );
 
+create table movie_land.user_images
+(
+  id         varchar(255) not null,
+  user_id    varchar(255) not null,
+  origin_url varchar(255) not null,
+  name       varchar(255) not null,
+  type       varchar(80)  not null,
+  deleted    bit          not null,
+  created_at datetime     not null,
+  updated_at datetime     not null
+);
+
+create table movie_land.user_images_histories
+(
+  id         varchar(255) not null,
+  rev_id     bigint       not null,
+  revtype    tinyint      not null,
+  user_id    varchar(255) not null,
+  origin_url varchar(255) not null,
+  name       varchar(255) not null,
+  type       varchar(80)  not null,
+  deleted    bit          not null,
+  created_at datetime     not null,
+  updated_at datetime     not null,
+  primary key (id, rev_id)
+);
+
+
+
