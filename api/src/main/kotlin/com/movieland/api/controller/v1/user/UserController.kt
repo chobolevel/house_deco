@@ -1,4 +1,4 @@
-package com.movieland.api.controller.user
+package com.movieland.api.controller.v1.user
 
 import com.movieland.api.annorations.HasAuthorityAdmin
 import com.movieland.api.annorations.HasAuthorityUser

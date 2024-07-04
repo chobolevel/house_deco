@@ -3,6 +3,7 @@ package com.movieland.api.service.user.converter
 import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.UserResponseDto
+import com.movieland.api.service.user.image.convert.UserImageConverter
 import com.movieland.domain.entity.user.User
 import com.movieland.domain.entity.user.UserRoleType
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -12,7 +13,8 @@ import java.time.ZoneOffset
 @Component
 class UserConverter(
     private val passwordEncoder: BCryptPasswordEncoder,
-    private val tsidFactory: TsidFactory
+    private val tsidFactory: TsidFactory,
+    private val userImageConverter: UserImageConverter
 ) {
 
     fun convert(request: CreateUserRequestDto): User {
@@ -36,6 +38,7 @@ class UserConverter(
             nickname = user.nickname!!,
             phone = user.phone!!,
             role = user.role,
+            profileImage = user.profileImage?.let { userImageConverter.convert(it) },
             createdAt = user.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
             updatedAt = user.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
         )
