@@ -32,5 +32,4 @@ class UserImageConverter(
             updatedAt = entity.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
         )
     }
-
 }

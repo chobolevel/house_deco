@@ -31,7 +31,8 @@ class UserImageController(
     fun createUserProfileImage(
         principal: Principal,
         @Valid
-        @RequestBody request: CreateUserProfileImageRequestDto
+        @RequestBody
+        request: CreateUserProfileImageRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.createUserProfileImage(principal.name, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -44,7 +45,8 @@ class UserImageController(
         @PathVariable id: String,
         principal: Principal,
         @Valid
-        @RequestBody request: UpdateUserProfileImageRequestDto
+        @RequestBody
+        request: UpdateUserProfileImageRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateUserProfileImage(id, principal.name, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -57,5 +59,4 @@ class UserImageController(
         val result = service.deleteUserProfileImage(id, principal.name)
         return ResponseEntity.ok(ResultResponse(result))
     }
-
 }

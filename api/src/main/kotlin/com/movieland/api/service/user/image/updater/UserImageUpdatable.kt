@@ -8,5 +8,4 @@ interface UserImageUpdatable {
     fun markAsUpdate(request: UpdateUserProfileImageRequestDto, userImage: UserImage): UserImage
 
     fun order(): Int
-
 }

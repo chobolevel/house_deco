@@ -39,5 +39,4 @@ class UserImageService(
         userImage.delete()
         return true
     }
-
 }
