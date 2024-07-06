@@ -1,6 +1,7 @@
 package com.movieland.api.advice
 
 import com.movieland.api.dto.common.ErrorResponse
+import com.movieland.domain.exception.DataNotFoundException
 import com.movieland.domain.exception.ErrorCode
 import com.movieland.domain.exception.ParameterInvalidException
 import com.movieland.domain.exception.UnAuthorizedException
@@ -43,6 +44,13 @@ class ExceptionHandler {
 
     @ExceptionHandler(UnAuthorizedException::class)
     fun handleUnAuthorizedException(e: UnAuthorizedException): ResponseEntity<ErrorResponse> {
+        val errorCode = e.errorCode
+        val errorMessage = e.message
+        return ResponseEntity.status(e.status).body(ErrorResponse(errorCode, errorMessage))
+    }
+
+    @ExceptionHandler(DataNotFoundException::class)
+    fun handleDataNotFoundException(e: DataNotFoundException): ResponseEntity<ErrorResponse> {
         val errorCode = e.errorCode
         val errorMessage = e.message
         return ResponseEntity.status(e.status).body(ErrorResponse(errorCode, errorMessage))

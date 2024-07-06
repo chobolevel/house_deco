@@ -1,6 +1,6 @@
 package com.movieland.api.service.user
 
-import com.movieland.api.dto.common.PaginationResponse
+import com.movieland.api.dto.common.PaginationResponseDto
 import com.movieland.api.dto.jwt.JwtResponse
 import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.LoginRequestDto
@@ -97,10 +97,10 @@ class UserService(
         queryFilter: UserQueryFilter,
         pagination: Pagination,
         orderTypes: List<UserOrderType>?
-    ): PaginationResponse {
+    ): PaginationResponseDto {
         val result = userFinder.searchByPredicates(queryFilter, pagination, orderTypes)
         val totalCount = userFinder.countByPredicates(queryFilter)
-        return PaginationResponse(
+        return PaginationResponseDto(
             skipCount = pagination.skip,
             limitCount = pagination.limit,
             data = result.map { userConverter.convert(it) },
