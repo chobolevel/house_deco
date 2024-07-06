@@ -4,7 +4,6 @@ import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.image.CreateUserProfileImageRequestDto
 import com.movieland.api.dto.user.image.UserImageResponseDto
 import com.movieland.domain.entity.user.image.UserImage
-import com.movieland.domain.entity.user.image.UserImageType
 import org.springframework.stereotype.Component
 import java.time.ZoneOffset
 
