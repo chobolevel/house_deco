@@ -25,22 +25,25 @@ class User(
     @Column(nullable = false, updatable = false)
     var id: String? = null,
     @Column(nullable = false)
-    var email: String? = null,
+    var email: String,
     @Column(nullable = false)
-    var password: String? = null,
+    var password: String,
     @Column
     var socialId: String? = null,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var loginType: UserLoginType? = null,
+    var loginType: UserLoginType,
     @Column(nullable = false)
-    var nickname: String? = null,
+    var nickname: String,
     @Column(nullable = false)
-    var phone: String? = null,
+    var phone: String,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var role: UserRoleType = UserRoleType.ROLE_USER,
 ) : Audit() {
+
+    @Column(nullable = false)
+    var point: Int = 0
 
     @Column(nullable = false)
     var deleted: Boolean? = false

@@ -33,10 +33,10 @@ class UserConverter(
     fun convert(user: User): UserResponseDto {
         return UserResponseDto(
             id = user.id!!,
-            email = user.email!!,
-            loginType = user.loginType!!,
-            nickname = user.nickname!!,
-            phone = user.phone!!,
+            email = user.email,
+            loginType = user.loginType,
+            nickname = user.nickname,
+            phone = user.phone,
             role = user.role,
             profileImage = user.profileImage?.let { userImageConverter.convert(it) },
             createdAt = user.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
