@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 
-@Tag(name = "UserImage (유저 이미지)")
+@Tag(name = "UserImage (유저 이미지)", description = "유저 이미지 API")
 @RestController
 @RequestMapping("/api/v1/users")
 class UserImageController(
