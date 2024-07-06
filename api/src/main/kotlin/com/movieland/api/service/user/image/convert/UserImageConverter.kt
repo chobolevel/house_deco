@@ -18,7 +18,6 @@ class UserImageConverter(
             id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
-            type = UserImageType.PROFILE
         )
     }
 

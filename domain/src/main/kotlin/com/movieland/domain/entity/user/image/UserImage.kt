@@ -29,7 +29,7 @@ class UserImage(
     var name: String,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var type: UserImageType,
+    var type: UserImageType = UserImageType.PROFILE,
 ) : Audit() {
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
