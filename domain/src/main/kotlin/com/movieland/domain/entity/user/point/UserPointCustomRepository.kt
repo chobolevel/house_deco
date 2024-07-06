@@ -28,5 +28,4 @@ class UserPointCustomRepository : QuerydslRepositorySupport(UserPoint::class.jav
             .where(*predicates)
             .fetchCount()
     }
-
 }

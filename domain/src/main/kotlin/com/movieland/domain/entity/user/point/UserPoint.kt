@@ -8,7 +8,6 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
-import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
@@ -48,7 +47,6 @@ class UserPoint(
             this.user = user
         }
     }
-
 }
 
 enum class UserPointType {

@@ -8,5 +8,4 @@ interface UserPointUpdatable {
     fun markAsUpdate(request: UpdateUserPointRequestDto, userPoint: UserPoint): UserPoint
 
     fun order(): Int
-
 }

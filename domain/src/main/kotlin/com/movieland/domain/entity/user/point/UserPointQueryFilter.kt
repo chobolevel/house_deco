@@ -14,5 +14,4 @@ class UserPointQueryFilter(
             type?.let { userPoint.type.eq(it) }
         ).toTypedArray()
     }
-
 }

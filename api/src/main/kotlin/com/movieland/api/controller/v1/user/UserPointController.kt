@@ -35,7 +35,8 @@ class UserPointController(
     @PostMapping("/users/{id}/points")
     fun createUserPoint(
         @PathVariable id: String,
-        @Valid @RequestBody request: CreateUserPointRequestDto
+        @Valid @RequestBody
+        request: CreateUserPointRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.createUserPoint(id, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -92,5 +93,4 @@ class UserPointController(
         )
         return ResponseEntity.ok(ResultResponse(result))
     }
-
 }

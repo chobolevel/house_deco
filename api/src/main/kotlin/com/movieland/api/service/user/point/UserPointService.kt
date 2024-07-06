@@ -65,5 +65,4 @@ class UserPointService(
         userPoint.delete()
         return true
     }
-
 }
