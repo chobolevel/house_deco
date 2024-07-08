@@ -26,8 +26,8 @@ class UserImageConverter(
             originUrl = entity.originUrl,
             name = entity.name,
             type = entity.type,
-            createdAt = entity.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
-            updatedAt = entity.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
+            createdAt = entity.createdAt!!.toInstant().toEpochMilli(),
+            updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )
     }
 }

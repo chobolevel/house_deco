@@ -39,8 +39,8 @@ class UserConverter(
             phone = user.phone,
             role = user.role,
             profileImage = user.profileImage?.let { userImageConverter.convert(it) },
-            createdAt = user.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
-            updatedAt = user.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
+            createdAt = user.createdAt!!.toInstant().toEpochMilli(),
+            updatedAt = user.updatedAt!!.toInstant().toEpochMilli()
         )
     }
 }

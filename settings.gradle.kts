@@ -1,2 +1,2 @@
-rootProject.name = "movie-land"
+rootProject.name = "house-deco"
 include("api", "domain")

@@ -27,8 +27,8 @@ class UserPointConverter(
             currency = entity.currency,
             type = entity.type,
             description = entity.description,
-            createdAt = entity.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
-            updatedAt = entity.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
+            createdAt = entity.createdAt!!.toInstant().toEpochMilli(),
+            updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )
     }
 }
