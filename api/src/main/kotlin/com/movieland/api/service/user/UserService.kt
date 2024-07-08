@@ -115,7 +115,7 @@ class UserService(
 
     fun updateUser(id: String, request: UpdateUserRequestDto): String {
         val user = userFinder.findById(id)
-        userUpdaters.forEach { it.markAsUpdate(request, user) }
+        userUpdaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, user) }
         return user.id!!
     }
 
