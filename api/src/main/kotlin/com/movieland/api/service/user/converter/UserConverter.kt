@@ -8,7 +8,6 @@ import com.movieland.domain.entity.user.User
 import com.movieland.domain.entity.user.UserRoleType
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
-import java.time.ZoneOffset
 
 @Component
 class UserConverter(

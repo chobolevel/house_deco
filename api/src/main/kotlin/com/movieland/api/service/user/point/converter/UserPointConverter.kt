@@ -5,7 +5,6 @@ import com.movieland.api.dto.user.point.CreateUserPointRequestDto
 import com.movieland.api.dto.user.point.UserPointResponseDto
 import com.movieland.domain.entity.user.point.UserPoint
 import org.springframework.stereotype.Component
-import java.time.ZoneOffset
 
 @Component
 class UserPointConverter(

@@ -21,5 +21,4 @@ class ProductCategoryQueryCreator {
             limit = limit
         )
     }
-
 }

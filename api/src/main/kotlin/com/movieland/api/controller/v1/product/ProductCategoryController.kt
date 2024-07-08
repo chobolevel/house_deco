@@ -32,7 +32,10 @@ class ProductCategoryController(
     @HasAuthorityAdmin
     @Operation(summary = "상품 카테고리 등록 API")
     @PostMapping("/products/categories")
-    fun createProductCategory(@Valid @RequestBody request: CreateProductCategoryRequestDto): ResponseEntity<ResultResponse> {
+    fun createProductCategory(
+        @Valid @RequestBody
+        request: CreateProductCategoryRequestDto
+    ): ResponseEntity<ResultResponse> {
         val result = service.createProductCategory(request)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -63,7 +66,8 @@ class ProductCategoryController(
     @PutMapping("/products/categories/{id}")
     fun updateProductCategory(
         @PathVariable id: String,
-        @Valid @RequestBody request: UpdateProductCategoryRequestDto
+        @Valid @RequestBody
+        request: UpdateProductCategoryRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateProductCategory(id, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -76,5 +80,4 @@ class ProductCategoryController(
         val result = service.deleteProductCategory(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
-
 }

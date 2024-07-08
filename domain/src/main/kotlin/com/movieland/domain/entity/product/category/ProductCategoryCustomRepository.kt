@@ -28,5 +28,4 @@ class ProductCategoryCustomRepository : QuerydslRepositorySupport(ProductCategor
             .where(productCategory.parent.id.isNull, *predicates)
             .fetchCount()
     }
-
 }

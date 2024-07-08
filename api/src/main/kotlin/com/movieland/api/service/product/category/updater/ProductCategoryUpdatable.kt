@@ -8,5 +8,4 @@ interface ProductCategoryUpdatable {
     fun markAsUpdate(request: UpdateProductCategoryRequestDto, productCategory: ProductCategory): ProductCategory
 
     fun order(): Int
-
 }

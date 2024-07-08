@@ -40,7 +40,6 @@ class ProductCategory(
     fun resetParent() {
         this.parent = null
     }
-
 }
 
 enum class ProductCategoryOrderType {

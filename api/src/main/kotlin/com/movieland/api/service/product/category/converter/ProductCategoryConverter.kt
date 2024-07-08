@@ -25,5 +25,4 @@ class ProductCategoryConverter(
             categories = entity.categories.map { convert(it) }
         )
     }
-
 }

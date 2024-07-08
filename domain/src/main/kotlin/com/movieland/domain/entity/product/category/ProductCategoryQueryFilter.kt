@@ -12,5 +12,4 @@ class ProductCategoryQueryFilter(
             name?.let { productCategory.name.eq(it) }
         ).toTypedArray()
     }
-
 }
