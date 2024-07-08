@@ -5,7 +5,6 @@ import com.movieland.api.dto.user.point.CreateUserPointRequestDto
 import com.movieland.api.dto.user.point.UserPointResponseDto
 import com.movieland.domain.entity.user.point.UserPoint
 import org.springframework.stereotype.Component
-import java.time.ZoneOffset
 
 @Component
 class UserPointConverter(
@@ -27,8 +26,8 @@ class UserPointConverter(
             currency = entity.currency,
             type = entity.type,
             description = entity.description,
-            createdAt = entity.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
-            updatedAt = entity.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
+            createdAt = entity.createdAt!!.toInstant().toEpochMilli(),
+            updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )
     }
 }

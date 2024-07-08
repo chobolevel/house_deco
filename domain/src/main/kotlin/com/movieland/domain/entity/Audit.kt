@@ -7,7 +7,7 @@ import org.hibernate.envers.Audited
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 @MappedSuperclass
 @EntityListeners(value = [AuditingEntityListener::class])
@@ -16,11 +16,11 @@ class Audit {
 
     @Column(nullable = false)
     @CreatedDate
-    var createdAt: LocalDateTime? = null
+    var createdAt: OffsetDateTime? = null
         protected set
 
     @Column(nullable = false)
     @LastModifiedDate
-    var updatedAt: LocalDateTime? = null
+    var updatedAt: OffsetDateTime? = null
         protected set
 }

@@ -5,7 +5,6 @@ import com.movieland.api.dto.user.image.CreateUserProfileImageRequestDto
 import com.movieland.api.dto.user.image.UserImageResponseDto
 import com.movieland.domain.entity.user.image.UserImage
 import org.springframework.stereotype.Component
-import java.time.ZoneOffset
 
 @Component
 class UserImageConverter(
@@ -26,8 +25,8 @@ class UserImageConverter(
             originUrl = entity.originUrl,
             name = entity.name,
             type = entity.type,
-            createdAt = entity.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
-            updatedAt = entity.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
+            createdAt = entity.createdAt!!.toInstant().toEpochMilli(),
+            updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )
     }
 }

@@ -8,7 +8,6 @@ import com.movieland.domain.entity.user.User
 import com.movieland.domain.entity.user.UserRoleType
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
-import java.time.ZoneOffset
 
 @Component
 class UserConverter(
@@ -39,8 +38,8 @@ class UserConverter(
             phone = user.phone,
             role = user.role,
             profileImage = user.profileImage?.let { userImageConverter.convert(it) },
-            createdAt = user.createdAt!!.toInstant(ZoneOffset.UTC).toEpochMilli(),
-            updatedAt = user.updatedAt!!.toInstant(ZoneOffset.UTC).toEpochMilli()
+            createdAt = user.createdAt!!.toInstant().toEpochMilli(),
+            updatedAt = user.updatedAt!!.toInstant().toEpochMilli()
         )
     }
 }
