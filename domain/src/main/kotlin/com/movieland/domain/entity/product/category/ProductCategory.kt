@@ -11,11 +11,13 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import org.hibernate.envers.Audited
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @EntityListeners(value = [AuditingEntityListener::class])
 @Entity
 @Table(name = "product_categories")
+@Audited
 class ProductCategory(
     @Id
     @Column(nullable = false, updatable = false)
