@@ -46,7 +46,6 @@ class Product(
 
     @Column(nullable = false)
     var deleted: Boolean = false
-
 }
 
 enum class ProductStatusType {

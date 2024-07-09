@@ -28,5 +28,4 @@ class ProductCustomRepository : QuerydslRepositorySupport(Product::class.java) {
             .where(*predicates)
             .fetchCount()
     }
-
 }

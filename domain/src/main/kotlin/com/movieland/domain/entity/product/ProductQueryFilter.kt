@@ -14,5 +14,4 @@ class ProductQueryFilter(
             name?.let { product.name.eq(it) }
         ).toTypedArray()
     }
-
 }
