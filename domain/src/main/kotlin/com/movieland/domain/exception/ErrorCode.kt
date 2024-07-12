@@ -27,6 +27,9 @@ enum class ErrorCode {
     // PRODUCT_CATEGORY
     PRODUCT_CATEGORY_IS_NOT_FOUND,
 
+    // BRAND
+    BRAND_IS_NOT_FOUND,
+
     // PRODUCT
     PRODUCT_IS_NOT_FOUND
 }
