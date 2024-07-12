@@ -28,5 +28,4 @@ class BrandConverter(
             updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )
     }
-
 }

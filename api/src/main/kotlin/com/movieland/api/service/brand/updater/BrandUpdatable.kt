@@ -8,5 +8,4 @@ interface BrandUpdatable {
     fun markAsUpdate(request: UpdateBrandRequestDto, brand: Brand): Brand
 
     fun order(): Int
-
 }

@@ -28,5 +28,4 @@ class BrandCustomRepository : QuerydslRepositorySupport(Brand::class.java) {
             .where(*predicates)
             .fetchCount()
     }
-
 }

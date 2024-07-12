@@ -30,7 +30,10 @@ class BrandController(
 
     @Operation(summary = "브랜드 등록 API")
     @PostMapping("/brands")
-    fun createBrand(@Valid @RequestBody request: CreateBrandRequestDto): ResponseEntity<ResultResponse> {
+    fun createBrand(
+        @Valid @RequestBody
+        request: CreateBrandRequestDto
+    ): ResponseEntity<ResultResponse> {
         val result = service.createBrand(request)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -60,7 +63,8 @@ class BrandController(
     @PutMapping("/brands/{id}")
     fun updateBrand(
         @PathVariable id: String,
-        @Valid @RequestBody request: UpdateBrandRequestDto
+        @Valid @RequestBody
+        request: UpdateBrandRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateBrand(id, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -72,5 +76,4 @@ class BrandController(
         val result = service.deleteBrand(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
-
 }

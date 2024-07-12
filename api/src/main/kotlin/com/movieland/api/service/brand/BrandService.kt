@@ -63,5 +63,4 @@ class BrandService(
         repository.delete(brand)
         return true
     }
-
 }

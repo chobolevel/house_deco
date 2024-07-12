@@ -12,5 +12,4 @@ class BrandQueryFilter(
             name?.let { brand.name.eq(it) }
         ).toTypedArray()
     }
-
 }
