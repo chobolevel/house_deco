@@ -1,11 +1,11 @@
-package com.movieland.api.service.product.category
+package com.movieland.api.service.product
 
 import com.movieland.api.dto.common.PaginationResponseDto
 import com.movieland.api.dto.product.category.CreateProductCategoryRequestDto
 import com.movieland.api.dto.product.category.ProductCategoryResponseDto
 import com.movieland.api.dto.product.category.UpdateProductCategoryRequestDto
-import com.movieland.api.service.product.category.converter.ProductCategoryConverter
-import com.movieland.api.service.product.category.updater.ProductCategoryUpdatable
+import com.movieland.api.service.product.converter.ProductCategoryConverter
+import com.movieland.api.service.product.updater.ProductCategoryUpdatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.category.ProductCategoryFinder
 import com.movieland.domain.entity.product.category.ProductCategoryOrderType

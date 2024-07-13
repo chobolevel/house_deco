@@ -1,4 +1,4 @@
-package com.movieland.api.service.product.category.converter
+package com.movieland.api.service.product.converter
 
 import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.product.category.CreateProductCategoryRequestDto

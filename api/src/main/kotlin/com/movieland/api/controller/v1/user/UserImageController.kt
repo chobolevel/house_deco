@@ -4,7 +4,7 @@ import com.movieland.api.annorations.HasAuthorityUser
 import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.user.image.CreateUserProfileImageRequestDto
 import com.movieland.api.dto.user.image.UpdateUserProfileImageRequestDto
-import com.movieland.api.service.user.image.UserImageService
+import com.movieland.api.service.user.UserImageService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid

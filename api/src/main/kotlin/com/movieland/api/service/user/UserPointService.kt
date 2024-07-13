@@ -1,11 +1,11 @@
-package com.movieland.api.service.user.point
+package com.movieland.api.service.user
 
 import com.movieland.api.dto.common.PaginationResponseDto
 import com.movieland.api.dto.user.point.CreateUserPointRequestDto
 import com.movieland.api.dto.user.point.UpdateUserPointRequestDto
 import com.movieland.api.dto.user.point.UserPointResponseDto
-import com.movieland.api.service.user.point.converter.UserPointConverter
-import com.movieland.api.service.user.point.updater.UserPointUpdatable
+import com.movieland.api.service.user.converter.UserPointConverter
+import com.movieland.api.service.user.updater.UserPointUpdatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.user.UserFinder
 import com.movieland.domain.entity.user.point.UserPointFinder

@@ -1,10 +1,13 @@
 package com.movieland.domain.entity.brand
 
 import com.movieland.domain.entity.Audit
+import com.movieland.domain.entity.product.Product
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import org.hibernate.annotations.SQLDelete
 import org.hibernate.envers.Audited
@@ -23,7 +26,14 @@ class Brand(
     var name: String,
     @Column(nullable = false)
     var link: String
-) : Audit()
+) : Audit() {
+
+    @Column(nullable = false)
+    var deleted: Boolean = false
+
+    @OneToMany(mappedBy = "brand", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var products = mutableListOf<Product>()
+}
 
 enum class BrandOrderType {
     CREATED_AT_ASC,

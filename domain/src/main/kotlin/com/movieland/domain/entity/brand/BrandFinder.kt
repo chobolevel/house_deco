@@ -7,6 +7,7 @@ import com.movieland.domain.exception.ErrorCode
 import com.querydsl.core.types.OrderSpecifier
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import kotlin.jvm.Throws
 
 @Component
 class BrandFinder(
@@ -14,6 +15,7 @@ class BrandFinder(
     private val customRepository: BrandCustomRepository
 ) {
 
+    @Throws(DataNotFoundException::class)
     fun findById(id: String): Brand {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.BRAND_IS_NOT_FOUND,

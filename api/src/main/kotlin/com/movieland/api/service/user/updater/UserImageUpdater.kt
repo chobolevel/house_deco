@@ -1,4 +1,4 @@
-package com.movieland.api.service.user.image.updater
+package com.movieland.api.service.user.updater
 
 import com.movieland.api.dto.user.image.UpdateUserProfileImageRequestDto
 import com.movieland.domain.entity.user.image.UserImage
