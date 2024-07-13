@@ -23,7 +23,11 @@ class Brand(
     var name: String,
     @Column(nullable = false)
     var link: String
-) : Audit()
+) : Audit() {
+
+    @Column(nullable = false)
+    var deleted: Boolean = false
+}
 
 enum class BrandOrderType {
     CREATED_AT_ASC,
