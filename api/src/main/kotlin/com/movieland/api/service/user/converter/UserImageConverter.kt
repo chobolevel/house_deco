@@ -1,4 +1,4 @@
-package com.movieland.api.service.user.image.convert
+package com.movieland.api.service.user.converter
 
 import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.image.CreateUserProfileImageRequestDto

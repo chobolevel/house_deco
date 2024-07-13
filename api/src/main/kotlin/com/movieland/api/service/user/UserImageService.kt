@@ -1,9 +1,9 @@
-package com.movieland.api.service.user.image
+package com.movieland.api.service.user
 
 import com.movieland.api.dto.user.image.CreateUserProfileImageRequestDto
 import com.movieland.api.dto.user.image.UpdateUserProfileImageRequestDto
-import com.movieland.api.service.user.image.convert.UserImageConverter
-import com.movieland.api.service.user.image.updater.UserImageUpdatable
+import com.movieland.api.service.user.converter.UserImageConverter
+import com.movieland.api.service.user.updater.UserImageUpdatable
 import com.movieland.domain.entity.user.UserFinder
 import com.movieland.domain.entity.user.image.UserImageFinder
 import com.movieland.domain.entity.user.image.UserImageRepository

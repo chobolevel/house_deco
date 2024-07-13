@@ -7,6 +7,7 @@ import com.movieland.domain.exception.ErrorCode
 import com.querydsl.core.types.OrderSpecifier
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import kotlin.jvm.Throws
 
 @Component
 class ProductCategoryFinder(
@@ -14,6 +15,7 @@ class ProductCategoryFinder(
     private val customRepository: ProductCategoryCustomRepository
 ) {
 
+    @Throws(DataNotFoundException::class)
     fun findById(id: String): ProductCategory {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.PRODUCT_CATEGORY_IS_NOT_FOUND,

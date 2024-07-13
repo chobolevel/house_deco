@@ -4,8 +4,8 @@ import com.movieland.api.annorations.HasAuthorityAdmin
 import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.user.point.CreateUserPointRequestDto
 import com.movieland.api.dto.user.point.UpdateUserPointRequestDto
-import com.movieland.api.service.user.point.UserPointQueryCreator
-import com.movieland.api.service.user.point.UserPointService
+import com.movieland.api.service.user.query.UserPointQueryCreator
+import com.movieland.api.service.user.UserPointService
 import com.movieland.domain.entity.user.point.UserPointOrderType
 import com.movieland.domain.entity.user.point.UserPointType
 import io.swagger.v3.oas.annotations.Operation

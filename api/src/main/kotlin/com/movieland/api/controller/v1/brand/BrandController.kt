@@ -1,5 +1,6 @@
 package com.movieland.api.controller.v1.brand
 
+import com.movieland.api.annorations.HasAuthorityAdmin
 import com.movieland.api.dto.brand.CreateBrandRequestDto
 import com.movieland.api.dto.brand.UpdateBrandRequestDto
 import com.movieland.api.dto.common.ResultResponse
@@ -28,6 +29,7 @@ class BrandController(
     private val queryCreator: BrandQueryCreator
 ) {
 
+    @HasAuthorityAdmin
     @Operation(summary = "브랜드 등록 API")
     @PostMapping("/brands")
     fun createBrand(
@@ -59,6 +61,7 @@ class BrandController(
         return ResponseEntity.ok(ResultResponse(result))
     }
 
+    @HasAuthorityAdmin
     @Operation(summary = "브랜드 정보 수정 API")
     @PutMapping("/brands/{id}")
     fun updateBrand(
@@ -70,6 +73,7 @@ class BrandController(
         return ResponseEntity.ok(ResultResponse(result))
     }
 
+    @HasAuthorityAdmin
     @Operation(summary = "브랜드 정보 삭제 API")
     @DeleteMapping("/brands/{id}")
     fun deleteBrand(@PathVariable id: String): ResponseEntity<ResultResponse> {
