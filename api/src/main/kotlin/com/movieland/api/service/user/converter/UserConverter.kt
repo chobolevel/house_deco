@@ -3,7 +3,6 @@ package com.movieland.api.service.user.converter
 import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.UserResponseDto
-import com.movieland.api.service.user.image.convert.UserImageConverter
 import com.movieland.domain.entity.user.User
 import com.movieland.domain.entity.user.UserRoleType
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder

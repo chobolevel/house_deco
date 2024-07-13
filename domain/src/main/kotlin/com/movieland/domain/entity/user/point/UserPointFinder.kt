@@ -7,6 +7,7 @@ import com.movieland.domain.exception.ErrorCode
 import com.querydsl.core.types.OrderSpecifier
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import kotlin.jvm.Throws
 
 @Component
 class UserPointFinder(
@@ -14,6 +15,7 @@ class UserPointFinder(
     private val customRepository: UserPointCustomRepository
 ) {
 
+    @Throws(DataNotFoundException::class)
     fun findById(id: String): UserPoint {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_POINT_IS_NOT_FOUND,

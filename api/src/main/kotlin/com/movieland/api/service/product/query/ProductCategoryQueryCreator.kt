@@ -1,4 +1,4 @@
-package com.movieland.api.service.product.category
+package com.movieland.api.service.product.query
 
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.category.ProductCategoryQueryFilter
