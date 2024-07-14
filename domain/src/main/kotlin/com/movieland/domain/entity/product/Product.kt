@@ -3,6 +3,7 @@ package com.movieland.domain.entity.product
 import com.movieland.domain.entity.Audit
 import com.movieland.domain.entity.brand.Brand
 import com.movieland.domain.entity.product.category.ProductCategory
+import com.movieland.domain.entity.product.image.ProductImage
 import com.movieland.domain.entity.product.option.ProductOption
 import com.movieland.domain.entity.product.option.ProductOptionType
 import jakarta.persistence.CascadeType
@@ -59,6 +60,9 @@ class Product(
     var deleted: Boolean = false
 
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var images = mutableListOf<ProductImage>()
+
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     val options = mutableListOf<ProductOption>()
 
     fun getRequiredOptions(): List<ProductOption> {
@@ -78,6 +82,12 @@ class Product(
         // 주인 객체에서 슬레이브 객체까지 관리하도록 하는 것이 좋음
         if (brand.products.contains(this).not()) {
             brand.products.add(this)
+        }
+    }
+
+    fun addImage(productImage: ProductImage) {
+        if (this.images.contains(productImage).not()) {
+            this.images.add(productImage)
         }
     }
 }

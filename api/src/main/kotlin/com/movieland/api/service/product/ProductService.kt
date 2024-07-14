@@ -3,7 +3,9 @@ package com.movieland.api.service.product
 import com.movieland.api.dto.common.PaginationResponseDto
 import com.movieland.api.dto.product.CreateProductRequestDto
 import com.movieland.api.dto.product.ProductResponseDto
+import com.movieland.api.dto.product.UpdateProductRequestDto
 import com.movieland.api.service.product.converter.ProductConverter
+import com.movieland.api.service.product.updater.ProductUpdatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.ProductFinder
 import com.movieland.domain.entity.product.ProductOrderType
@@ -16,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional
 class ProductService(
     private val repository: ProductRepository,
     private val finder: ProductFinder,
-    private val converter: ProductConverter
+    private val converter: ProductConverter,
+    private val updaters: List<ProductUpdatable>
 ) {
 
     @Transactional
@@ -47,4 +50,17 @@ class ProductService(
         return converter.convert(product)
     }
 
+    @Transactional
+    fun updateProduct(id: String, request: UpdateProductRequestDto): String {
+        val product = finder.findById(id)
+        updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, product) }
+        return product.id
+    }
+
+    @Transactional
+    fun deleteProduct(id: String): Boolean {
+        val product = finder.findById(id)
+        repository.delete(product)
+        return true
+    }
 }

@@ -82,5 +82,4 @@ class ProductOptionConverter(
             updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )
     }
-
 }
