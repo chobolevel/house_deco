@@ -5,12 +5,14 @@ import com.querydsl.core.types.dsl.BooleanExpression
 
 class ProductQueryFilter(
     private val productCategoryId: String?,
+    private val brandId: String?,
     private val name: String?,
 ) {
 
     fun toPredicates(): Array<BooleanExpression> {
         return listOfNotNull(
             productCategoryId?.let { product.productCategory.id.eq(it) },
+            brandId?.let { product.brand.id.eq(it) },
             name?.let { product.name.eq(it) }
         ).toTypedArray()
     }
