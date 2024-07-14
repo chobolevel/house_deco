@@ -1,4 +1,4 @@
-package com.movieland.domain.entity.product.option
+package com.movieland.domain.entity.product.image
 
 import com.movieland.domain.entity.Audit
 import com.movieland.domain.entity.product.Product
@@ -18,53 +18,46 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @EntityListeners(value = [AuditingEntityListener::class])
 @Entity
-@Table(name = "product_options")
+@Table(name = "product_images")
 @Audited
-@SQLDelete(sql = "UPDATE product_options SET deleted = true WHERE id = ?")
-class ProductOption(
+@SQLDelete(sql = "UPDATE product_images SET deleted = true WHERE id = ?")
+class ProductImage(
     @Id
     @Column(nullable = false, updatable = false)
     var id: String,
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var type: ProductOptionType,
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    var status: ProductOptionStatus,
+    var originUrl: String,
     @Column(nullable = false)
     var name: String,
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var originalPrice: Int,
-    @Column(nullable = false)
-    var salePrice: Int,
-    @Column(nullable = false)
-    var stock: Int,
-    @Column(nullable = false)
-    var order: Int
+    var type: ProductImageType,
 ) : Audit() {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     var product: Product? = null
 
+    @Column(nullable = false)
+    var deleted: Boolean = false
+
     fun setBy(product: Product) {
         if (this.product != product) {
             this.product = product
         }
-        if (product.options.contains(this).not()) {
-            product.options.add(this)
-        }
+        // 매핑 객체 데이터 관리는 주인 객체가 수행!
+        product.addImage(this)
     }
 
 }
 
-enum class ProductOptionType {
-    REQUIRED,
-    OPTIONAL
+enum class ProductImageType {
+    MAIN,
+    DESCRIPTION
 }
 
-enum class ProductOptionStatus {
-    SALE,
-    PREPARING,
-    CLOSED
+enum class ProductImageUpdateMask {
+    ORIGIN_URL,
+    NAME,
+    TYPE
 }

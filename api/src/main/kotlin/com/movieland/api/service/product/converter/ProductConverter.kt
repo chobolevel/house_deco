@@ -17,7 +17,8 @@ class ProductConverter(
     private val brandFinder: BrandFinder,
     private val productOptionConverter: ProductOptionConverter,
     private val productCategoryConverter: ProductCategoryConverter,
-    private val brandConverter: BrandConverter
+    private val brandConverter: BrandConverter,
+    private val productImageConverter: ProductImageConverter
 ) {
 
     fun convert(request: CreateProductRequestDto): Product {
@@ -30,6 +31,8 @@ class ProductConverter(
         ).also { product ->
             product.setBy(productCategory)
             product.setBy(brand)
+            request.mainImages.forEach { productImageConverter.convertToMainImage(it, product) }
+            request.descriptionImages.forEach { productImageConverter.convertToDescriptionImage(it, product) }
             request.requiredOptions.forEach { productOptionConverter.convertRequiredOptionWithProduct(it, product) }
             request.optionalOptions?.onEach { productOptionConverter.convertOptionOptionWithProduct(it, product) }
         }
