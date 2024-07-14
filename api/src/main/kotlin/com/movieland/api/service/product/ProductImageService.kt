@@ -1,11 +1,9 @@
 package com.movieland.api.service.product
 
-import com.movieland.api.dto.product.UpdateProductRequestDto
 import com.movieland.api.dto.product.image.CreateProductImageRequestDto
 import com.movieland.api.dto.product.image.UpdateProductImageRequestDto
 import com.movieland.api.service.product.converter.ProductImageConverter
 import com.movieland.api.service.product.updater.ProductImageUpdatable
-import com.movieland.domain.entity.product.image.ProductImage
 import com.movieland.domain.entity.product.image.ProductImageFinder
 import com.movieland.domain.entity.product.image.ProductImageRepository
 import org.springframework.stereotype.Service
@@ -38,5 +36,4 @@ class ProductImageService(
         repository.delete(productImage)
         return true
     }
-
 }

@@ -48,7 +48,6 @@ class ProductImage(
         // 매핑 객체 데이터 관리는 주인 객체가 수행!
         product.addImage(this)
     }
-
 }
 
 enum class ProductImageType {

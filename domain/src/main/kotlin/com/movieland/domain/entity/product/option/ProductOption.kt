@@ -55,7 +55,6 @@ class ProductOption(
             product.options.add(this)
         }
     }
-
 }
 
 enum class ProductOptionType {

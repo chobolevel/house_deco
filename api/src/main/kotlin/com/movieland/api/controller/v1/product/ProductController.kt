@@ -32,7 +32,10 @@ class ProductController(
     @HasAuthorityAdmin
     @Operation(summary = "상품 정보 등록 API")
     @PostMapping("/products")
-    fun createProduct(@Valid @RequestBody request: CreateProductRequestDto): ResponseEntity<ResultResponse> {
+    fun createProduct(
+        @Valid @RequestBody
+        request: CreateProductRequestDto
+    ): ResponseEntity<ResultResponse> {
         val result = service.createProduct(request)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -65,7 +68,8 @@ class ProductController(
     @PutMapping("/products/{id}")
     fun updateProduct(
         @PathVariable id: String,
-        @Valid @RequestBody request: UpdateProductRequestDto
+        @Valid @RequestBody
+        request: UpdateProductRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateProduct(id, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -78,5 +82,4 @@ class ProductController(
         val result = service.deleteProduct(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
-
 }

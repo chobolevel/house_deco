@@ -23,5 +23,4 @@ class ProductQueryCreator {
             limit = limit
         )
     }
-
 }

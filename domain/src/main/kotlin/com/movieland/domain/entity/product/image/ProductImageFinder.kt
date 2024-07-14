@@ -16,5 +16,4 @@ class ProductImageFinder(
             message = "상품 이미지를 찾을 수 없습니다."
         )
     }
-
 }

@@ -25,7 +25,10 @@ class ProductImageController(
 
     @Operation(summary = "상품 이미지 추가 API")
     @PostMapping("/products/images")
-    fun createProductImage(@Valid @RequestBody request: CreateProductImageRequestDto): ResponseEntity<ResultResponse> {
+    fun createProductImage(
+        @Valid @RequestBody
+        request: CreateProductImageRequestDto
+    ): ResponseEntity<ResultResponse> {
         val result = service.createProductImage(request)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -34,7 +37,8 @@ class ProductImageController(
     @PutMapping("/products/images/{id}")
     fun updateProductImage(
         @PathVariable id: String,
-        @Valid @RequestBody request: UpdateProductImageRequestDto
+        @Valid @RequestBody
+        request: UpdateProductImageRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateProductImage(id, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -46,6 +50,4 @@ class ProductImageController(
         val result = service.deleteProductImage(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
-
-
 }
