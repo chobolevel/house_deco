@@ -4,6 +4,7 @@ import com.movieland.domain.entity.Audit
 import com.movieland.domain.entity.brand.Brand
 import com.movieland.domain.entity.product.category.ProductCategory
 import com.movieland.domain.entity.product.image.ProductImage
+import com.movieland.domain.entity.product.image.ProductImageType
 import com.movieland.domain.entity.product.option.ProductOption
 import com.movieland.domain.entity.product.option.ProductOptionType
 import jakarta.persistence.CascadeType
@@ -65,6 +66,14 @@ class Product(
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     val options = mutableListOf<ProductOption>()
 
+    fun getMainImages(): List<ProductImage> {
+        return this.images.filter { it.type == ProductImageType.MAIN }
+    }
+
+    fun getDescriptionImages(): List<ProductImage> {
+        return this.images.filter { it.type == ProductImageType.DESCRIPTION }
+    }
+
     fun getRequiredOptions(): List<ProductOption> {
         return this.options.filter { it.type == ProductOptionType.REQUIRED }
     }
@@ -88,6 +97,16 @@ class Product(
     fun addImage(productImage: ProductImage) {
         if (this.images.contains(productImage).not()) {
             this.images.add(productImage)
+        }
+    }
+
+    fun deleteImagesByType(productImageType: ProductImageType) {
+        when (productImageType) {
+            ProductImageType.MAIN -> this.images.filter { it.type == ProductImageType.MAIN }
+                .forEach { it.deleted = true }
+
+            ProductImageType.DESCRIPTION -> this.images.filter { it.type == ProductImageType.DESCRIPTION }
+                .forEach { it.deleted = true }
         }
     }
 }
@@ -116,5 +135,7 @@ enum class ProductUpdateMask {
     BRAND,
     NAME,
     STATUS,
-    PRIORITY
+    PRIORITY,
+    MAIN_IMAGES,
+    DESCRIPTION_IMAGES
 }

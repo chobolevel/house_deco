@@ -37,3 +37,11 @@ data class UpdateProductImageRequestDto(
     @field:NotEmpty(message = "update_mask가 빈 배열입니다.")
     val updateMask: List<ProductImageUpdateMask>
 )
+
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
+data class UpdateProductImageRequestWithProductDto(
+    @field:NotBlank(message = "이미지 URL은 필수 값입니다.")
+    val originUrl: String,
+    @field:NotBlank(message = "이미지 파일명은 필수 값입니다.")
+    val name: String
+)

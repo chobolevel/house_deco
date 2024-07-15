@@ -48,6 +48,8 @@ class ProductConverter(
             reviewCount = entity.reviewCount,
             reviewAverage = entity.reviewAverage,
             salesCount = entity.salesCount,
+            mainImages = entity.getMainImages().map { productImageConverter.convert(it) },
+            descriptionImages = entity.getDescriptionImages().map { productImageConverter.convert(it) },
             requiredOptions = entity.getRequiredOptions().map { productOptionConverter.convert(it) },
             optionalOptions = entity.getOptionalOptions().map { productOptionConverter.convert(it) },
             createdAt = entity.createdAt!!.toInstant().toEpochMilli(),

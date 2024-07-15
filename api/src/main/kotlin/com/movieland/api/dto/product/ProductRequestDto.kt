@@ -3,6 +3,8 @@ package com.movieland.api.dto.product
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import com.movieland.api.dto.product.image.CreateProductImageRequestWithProductDto
+import com.movieland.api.dto.product.image.UpdateProductImageRequestDto
+import com.movieland.api.dto.product.image.UpdateProductImageRequestWithProductDto
 import com.movieland.api.dto.product.option.CreateProductOptionRequestWithProductDto
 import com.movieland.domain.entity.product.ProductStatusType
 import com.movieland.domain.entity.product.ProductUpdateMask
@@ -36,6 +38,8 @@ data class UpdateProductRequestDto(
     val brandId: String?,
     val name: String?,
     val status: ProductStatusType?,
+    val mainImages: List<UpdateProductImageRequestWithProductDto>?,
+    val descriptionImages: List<UpdateProductImageRequestWithProductDto>?,
     @field:NotNull(message = "update_mask는 필수 값입니다.")
     @field:NotEmpty(message = "update_mask가 빈 배열입니다.")
     val updateMask: List<ProductUpdateMask>

@@ -1,16 +1,19 @@
 package com.movieland.api.service.product.updater
 
 import com.movieland.api.dto.product.UpdateProductRequestDto
+import com.movieland.api.service.product.converter.ProductImageConverter
 import com.movieland.domain.entity.brand.BrandFinder
 import com.movieland.domain.entity.product.Product
 import com.movieland.domain.entity.product.ProductUpdateMask
 import com.movieland.domain.entity.product.category.ProductCategoryFinder
+import com.movieland.domain.entity.product.image.ProductImageType
 import org.springframework.stereotype.Component
 
 @Component
 class ProductUpdater(
     private val productCategoryFinder: ProductCategoryFinder,
     private val brandFinder: BrandFinder,
+    private val productImageConverter: ProductImageConverter
 ) : ProductUpdatable {
 
     override fun markAsUpdate(request: UpdateProductRequestDto, product: Product): Product {
@@ -28,6 +31,15 @@ class ProductUpdater(
 
                 ProductUpdateMask.NAME -> product.name = request.name!!
                 ProductUpdateMask.STATUS -> product.status = request.status!!
+                ProductUpdateMask.MAIN_IMAGES -> {
+                    product.deleteImagesByType(ProductImageType.MAIN)
+                    request.mainImages?.map { productImageConverter.convertToMainImage(it, product) }
+                }
+
+                ProductUpdateMask.DESCRIPTION_IMAGES -> {
+                    product.deleteImagesByType(ProductImageType.DESCRIPTION)
+                    request.descriptionImages?.map { productImageConverter.convertToDescriptionImage(it, product) }
+                }
                 else -> Unit
             }
         }
