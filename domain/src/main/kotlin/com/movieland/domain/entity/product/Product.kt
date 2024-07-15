@@ -66,14 +66,6 @@ class Product(
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     val options = mutableListOf<ProductOption>()
 
-    fun getMainImages(): List<ProductImage> {
-        return this.images.filter { it.type == ProductImageType.MAIN }
-    }
-
-    fun getDescriptionImages(): List<ProductImage> {
-        return this.images.filter { it.type == ProductImageType.DESCRIPTION }
-    }
-
     fun getRequiredOptions(): List<ProductOption> {
         return this.options.filter { it.type == ProductOptionType.REQUIRED }
     }
@@ -100,14 +92,8 @@ class Product(
         }
     }
 
-    fun deleteImagesByType(productImageType: ProductImageType) {
-        when (productImageType) {
-            ProductImageType.MAIN -> this.images.filter { it.type == ProductImageType.MAIN }
-                .forEach { it.deleted = true }
-
-            ProductImageType.DESCRIPTION -> this.images.filter { it.type == ProductImageType.DESCRIPTION }
-                .forEach { it.deleted = true }
-        }
+    fun deleteAllImages() {
+        this.images.forEach { it.deleted = true }
     }
 }
 
@@ -136,6 +122,5 @@ enum class ProductUpdateMask {
     NAME,
     STATUS,
     PRIORITY,
-    MAIN_IMAGES,
-    DESCRIPTION_IMAGES
+    IMAGES
 }

@@ -15,11 +15,9 @@ import org.springframework.stereotype.Component
 @Component
 class ProductImageConverter(
     private val tsidFactory: TsidFactory,
-    private val productFinder: ProductFinder
 ) {
 
-    fun convert(request: CreateProductImageRequestDto): ProductImage {
-        val product = productFinder.findById(request.productId)
+    fun convert(request: CreateProductImageRequestDto, product: Product): ProductImage {
         return ProductImage(
             id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
@@ -30,45 +28,23 @@ class ProductImageConverter(
         }
     }
 
-    fun convertToMainImage(request: CreateProductImageRequestWithProductDto, product: Product): ProductImage {
+    fun convert(request: CreateProductImageRequestWithProductDto, product: Product): ProductImage {
         return ProductImage(
             id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
-            type = ProductImageType.MAIN,
+            type = request.type
         ).also {
             it.setBy(product)
         }
     }
 
-    fun convertToMainImage(request: UpdateProductImageRequestWithProductDto, product: Product): ProductImage {
+    fun convert(request: UpdateProductImageRequestWithProductDto, product: Product): ProductImage {
         return ProductImage(
             id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
-            type = ProductImageType.MAIN,
-        ).also {
-            it.setBy(product)
-        }
-    }
-
-    fun convertToDescriptionImage(request: CreateProductImageRequestWithProductDto, product: Product): ProductImage {
-        return ProductImage(
-            id = tsidFactory.create().toString(),
-            originUrl = request.originUrl,
-            name = request.name,
-            type = ProductImageType.DESCRIPTION,
-        ).also {
-            it.setBy(product)
-        }
-    }
-
-    fun convertToDescriptionImage(request: UpdateProductImageRequestWithProductDto, product: Product): ProductImage {
-        return ProductImage(
-            id = tsidFactory.create().toString(),
-            originUrl = request.originUrl,
-            name = request.name,
-            type = ProductImageType.DESCRIPTION,
+            type = request.type
         ).also {
             it.setBy(product)
         }

@@ -31,14 +31,9 @@ class ProductUpdater(
 
                 ProductUpdateMask.NAME -> product.name = request.name!!
                 ProductUpdateMask.STATUS -> product.status = request.status!!
-                ProductUpdateMask.MAIN_IMAGES -> {
-                    product.deleteImagesByType(ProductImageType.MAIN)
-                    request.mainImages?.map { productImageConverter.convertToMainImage(it, product) }
-                }
-
-                ProductUpdateMask.DESCRIPTION_IMAGES -> {
-                    product.deleteImagesByType(ProductImageType.DESCRIPTION)
-                    request.descriptionImages?.map { productImageConverter.convertToDescriptionImage(it, product) }
+                ProductUpdateMask.IMAGES -> {
+                    product.deleteAllImages()
+                    request.images?.onEach { productImageConverter.convert(it, product) }
                 }
                 else -> Unit
             }

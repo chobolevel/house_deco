@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import org.hibernate.annotations.SQLDelete
+import org.hibernate.annotations.Where
 import org.hibernate.envers.Audited
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
@@ -21,6 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name = "product_images")
 @Audited
 @SQLDelete(sql = "UPDATE product_images SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 class ProductImage(
     @Id
     @Column(nullable = false, updatable = false)
@@ -52,7 +54,7 @@ class ProductImage(
 
 enum class ProductImageType {
     MAIN,
-    DESCRIPTION
+    SUB
 }
 
 enum class ProductImageUpdateMask {
