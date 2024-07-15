@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import com.movieland.api.dto.brand.BrandResponseDto
 import com.movieland.api.dto.product.category.ProductCategoryResponseDto
+import com.movieland.api.dto.product.image.ProductImageResponseDto
 import com.movieland.api.dto.product.option.ProductOptionResponseDto
 import com.movieland.domain.entity.product.ProductStatusType
 
@@ -17,6 +18,7 @@ data class ProductResponseDto(
     val reviewCount: Int,
     val reviewAverage: Double,
     val salesCount: Int,
+    val images: List<ProductImageResponseDto>,
     val requiredOptions: List<ProductOptionResponseDto>,
     val optionalOptions: List<ProductOptionResponseDto>,
     val createdAt: Long,
