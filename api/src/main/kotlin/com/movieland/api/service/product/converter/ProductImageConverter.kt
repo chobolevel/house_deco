@@ -19,7 +19,6 @@ class ProductImageConverter(
 
     fun convert(request: CreateProductImageRequestDto, product: Product): ProductImage {
         return ProductImage(
-            id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
             type = request.type
@@ -30,7 +29,6 @@ class ProductImageConverter(
 
     fun convert(request: CreateProductImageRequestWithProductDto, product: Product): ProductImage {
         return ProductImage(
-            id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
             type = request.type
@@ -41,7 +39,6 @@ class ProductImageConverter(
 
     fun convert(request: UpdateProductImageRequestWithProductDto, product: Product): ProductImage {
         return ProductImage(
-            id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
             type = request.type
@@ -52,7 +49,7 @@ class ProductImageConverter(
 
     fun convert(entity: ProductImage): ProductImageResponseDto {
         return ProductImageResponseDto(
-            id = entity.id,
+            id = entity.id!!,
             originUrl = entity.originUrl,
             name = entity.name,
             type = entity.type,

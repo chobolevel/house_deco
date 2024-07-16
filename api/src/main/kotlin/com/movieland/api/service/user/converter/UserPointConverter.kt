@@ -13,7 +13,6 @@ class UserPointConverter(
 
     fun convert(request: CreateUserPointRequestDto): UserPoint {
         return UserPoint(
-            id = tsidFactory.create().toString(),
             currency = request.currency,
             type = request.type,
             description = request.description,

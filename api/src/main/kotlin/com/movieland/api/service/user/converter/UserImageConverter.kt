@@ -13,7 +13,6 @@ class UserImageConverter(
 
     fun convert(request: CreateUserProfileImageRequestDto): UserImage {
         return UserImage(
-            id = tsidFactory.create().toString(),
             originUrl = request.originUrl,
             name = request.name,
         )

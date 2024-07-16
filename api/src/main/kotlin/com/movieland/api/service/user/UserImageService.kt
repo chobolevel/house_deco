@@ -20,7 +20,7 @@ class UserImageService(
     private val userFinder: UserFinder
 ) {
 
-    fun createUserProfileImage(userId: String, request: CreateUserProfileImageRequestDto): String {
+    fun createUserProfileImage(userId: Long, request: CreateUserProfileImageRequestDto): Long {
         val user = userFinder.findById(userId)
         val userImage = converter.convert(request).also {
             it.setBy(user)
@@ -28,13 +28,13 @@ class UserImageService(
         return repository.save(userImage).id!!
     }
 
-    fun updateUserProfileImage(id: String, userId: String, request: UpdateUserProfileImageRequestDto): String {
+    fun updateUserProfileImage(id: Long, userId: Long, request: UpdateUserProfileImageRequestDto): Long {
         val userImage = finder.findByIdAndUserId(id, userId)
         updaters.forEach { it.markAsUpdate(request, userImage) }
         return userImage.id!!
     }
 
-    fun deleteUserProfileImage(id: String, userId: String): Boolean {
+    fun deleteUserProfileImage(id: Long, userId: Long): Boolean {
         val userImage = finder.findByIdAndUserId(id, userId)
         userImage.delete()
         return true

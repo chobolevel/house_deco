@@ -16,7 +16,7 @@ class ProductCategoryFinder(
 ) {
 
     @Throws(DataNotFoundException::class)
-    fun findById(id: String): ProductCategory {
+    fun findById(id: Long): ProductCategory {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.PRODUCT_CATEGORY_IS_NOT_FOUND,
             message = "상품 카테고리를 찾을 수 없습니다."

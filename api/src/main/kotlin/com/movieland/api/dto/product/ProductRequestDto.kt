@@ -15,9 +15,9 @@ import jakarta.validation.constraints.NotNull
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class CreateProductRequestDto(
     @field:NotBlank(message = "상품 카테고리는 필수 값입니다.")
-    val productCategoryId: String,
+    val productCategoryId: Long,
     @field:NotBlank(message = "상품 브랜드는 필수 값입니다.")
-    val brandId: String,
+    val brandId: Long,
     @field:NotBlank(message = "상품명은 필수 값입니다.")
     val name: String,
     @field:NotNull(message = "상품 메인 이미지는 필수 값입니다.")
@@ -31,8 +31,8 @@ data class CreateProductRequestDto(
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class UpdateProductRequestDto(
-    val productCategoryId: String?,
-    val brandId: String?,
+    val productCategoryId: Long?,
+    val brandId: Long?,
     val name: String?,
     val status: ProductStatusType?,
     val images: List<UpdateProductImageRequestWithProductDto>?,

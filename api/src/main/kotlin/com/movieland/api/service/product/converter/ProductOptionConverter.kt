@@ -20,7 +20,6 @@ class ProductOptionConverter(
     fun convert(request: CreateProductOptionRequestDto): ProductOption {
         val product = productFinder.findById(request.productId)
         return ProductOption(
-            id = tsidFactory.create().toString(),
             type = request.type,
             status = ProductOptionStatus.PREPARING,
             name = request.name,
@@ -38,7 +37,6 @@ class ProductOptionConverter(
         product: Product
     ): ProductOption {
         return ProductOption(
-            id = tsidFactory.create().toString(),
             type = ProductOptionType.REQUIRED,
             status = ProductOptionStatus.PREPARING,
             name = request.name,
@@ -56,7 +54,6 @@ class ProductOptionConverter(
         product: Product
     ): ProductOption {
         return ProductOption(
-            id = tsidFactory.create().toString(),
             type = ProductOptionType.OPTIONAL,
             status = ProductOptionStatus.PREPARING,
             name = request.name,
@@ -71,7 +68,7 @@ class ProductOptionConverter(
 
     fun convert(entity: ProductOption): ProductOptionResponseDto {
         return ProductOptionResponseDto(
-            id = entity.id,
+            id = entity.id!!,
             type = entity.type,
             status = entity.status,
             name = entity.name,

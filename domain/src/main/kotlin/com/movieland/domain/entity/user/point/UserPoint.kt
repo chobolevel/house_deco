@@ -8,6 +8,8 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
@@ -19,9 +21,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name = "user_points")
 @Audited
 class UserPoint(
-    @Id
-    @Column(nullable = false, updatable = false)
-    var id: String? = null,
     @Column(nullable = false)
     var currency: Int,
     @Enumerated(EnumType.STRING)
@@ -30,6 +29,10 @@ class UserPoint(
     @Column(nullable = false)
     var description: String
 ) : Audit() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     var user: User? = null

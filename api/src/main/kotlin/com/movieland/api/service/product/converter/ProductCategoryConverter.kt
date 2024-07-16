@@ -13,14 +13,13 @@ class ProductCategoryConverter(
 
     fun convert(request: CreateProductCategoryRequestDto): ProductCategory {
         return ProductCategory(
-            id = tsidFactory.create().toString(),
             name = request.name
         )
     }
 
     fun convert(entity: ProductCategory): ProductCategoryResponseDto {
         return ProductCategoryResponseDto(
-            id = entity.id,
+            id = entity.id!!,
             name = entity.name,
             categories = entity.categories.map { convert(it) }
         )

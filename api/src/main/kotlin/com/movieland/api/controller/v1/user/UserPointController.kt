@@ -34,7 +34,7 @@ class UserPointController(
     @Operation(summary = "유저 포인트 부여 API")
     @PostMapping("/users/{id}/points")
     fun createUserPoint(
-        @PathVariable id: String,
+        @PathVariable id: Long,
         @Valid @RequestBody
         request: CreateUserPointRequestDto
     ): ResponseEntity<ResultResponse> {
@@ -45,7 +45,7 @@ class UserPointController(
     @Operation(summary = "유저 포인트 내역 조회 API")
     @GetMapping("/users/{id}/points")
     fun searchUserPointHistories(
-        @PathVariable id: String,
+        @PathVariable id: Long,
         @RequestParam(required = false) type: UserPointType?,
         @RequestParam(required = false) skipCount: Long?,
         @RequestParam(required = false) limitCount: Long?,
@@ -59,7 +59,7 @@ class UserPointController(
 
     @Operation(summary = "유저 포인트 내역 단건 조회 API")
     @GetMapping("/users/{userId}/points/{id}")
-    fun fetchUserPointHistory(@PathVariable userId: String, @PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun fetchUserPointHistory(@PathVariable userId: Long, @PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.fetchUserPoint(
             userId = userId,
             id = id
@@ -71,8 +71,8 @@ class UserPointController(
     @Operation(summary = "유저 포인트 내역 수정 API")
     @PutMapping("/users/{userId}/points/{id}")
     fun updateUserPointHistory(
-        @PathVariable userId: String,
-        @PathVariable id: String,
+        @PathVariable userId: Long,
+        @PathVariable id: Long,
         @RequestBody request: UpdateUserPointRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateUserPoint(
@@ -86,7 +86,7 @@ class UserPointController(
     @HasAuthorityAdmin
     @Operation(summary = "유저 포인트 내역 삭제 API")
     @DeleteMapping("/users/{userId}/points/{id}")
-    fun deleteUserPointHistory(@PathVariable userId: String, @PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun deleteUserPointHistory(@PathVariable userId: Long, @PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.deleteUserPoint(
             userId = userId,
             id = id

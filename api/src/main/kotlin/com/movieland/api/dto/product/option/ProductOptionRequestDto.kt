@@ -6,7 +6,7 @@ import com.movieland.domain.entity.product.option.ProductOptionType
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class CreateProductOptionRequestDto(
-    val productId: String,
+    val productId: Long,
     val type: ProductOptionType,
     val name: String,
     val originalPrice: Int,

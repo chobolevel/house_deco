@@ -6,7 +6,7 @@ import com.movieland.domain.entity.user.image.UserImageType
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class UserImageResponseDto(
-    val id: String,
+    val id: Long,
     val originUrl: String,
     val name: String,
     val type: UserImageType,

@@ -8,6 +8,8 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -22,9 +24,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Audited
 @SQLDelete(sql = "UPDATE product_options SET deleted = true WHERE id = ?")
 class ProductOption(
-    @Id
-    @Column(nullable = false, updatable = false)
-    var id: String,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var type: ProductOptionType,
@@ -42,6 +41,10 @@ class ProductOption(
     @Column(nullable = false)
     var order: Int
 ) : Audit() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")

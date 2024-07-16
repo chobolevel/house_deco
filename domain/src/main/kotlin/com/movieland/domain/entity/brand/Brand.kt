@@ -6,6 +6,8 @@ import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
@@ -19,14 +21,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Audited
 @SQLDelete(sql = "UPDATE brands SET deleted = true WHERE id = ?")
 class Brand(
-    @Id
-    @Column(nullable = false, updatable = false)
-    var id: String,
     @Column(nullable = false)
     var name: String,
     @Column(nullable = false)
     var link: String
 ) : Audit() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
     @Column(nullable = false)
     var deleted: Boolean = false

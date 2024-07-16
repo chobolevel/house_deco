@@ -23,9 +23,9 @@ class BrandService(
 ) {
 
     @Transactional
-    fun createBrand(request: CreateBrandRequestDto): String {
+    fun createBrand(request: CreateBrandRequestDto): Long {
         val brand = converter.convert(request)
-        return repository.save(brand).id
+        return repository.save(brand).id!!
     }
 
     @Transactional(readOnly = true)
@@ -45,20 +45,20 @@ class BrandService(
     }
 
     @Transactional(readOnly = true)
-    fun fetchBrand(id: String): BrandResponseDto {
+    fun fetchBrand(id: Long): BrandResponseDto {
         val brand = finder.findById(id)
         return converter.convert(brand)
     }
 
     @Transactional
-    fun updateBrand(id: String, request: UpdateBrandRequestDto): String {
+    fun updateBrand(id: Long, request: UpdateBrandRequestDto): Long {
         val brand = finder.findById(id)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, brand) }
-        return brand.id
+        return brand.id!!
     }
 
     @Transactional
-    fun deleteBrand(id: String): Boolean {
+    fun deleteBrand(id: Long): Boolean {
         val brand = finder.findById(id)
         repository.delete(brand)
         return true

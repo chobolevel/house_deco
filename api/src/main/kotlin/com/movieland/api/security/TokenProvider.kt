@@ -111,7 +111,7 @@ class TokenProvider(
                 .setSigningKey(jwtProperties.secretKey)
                 .parseClaimsJws(token)
                 .body
-            val findUser = userFinder.findById(claims.subject)
+            val findUser = userFinder.findById(claims.subject.toLong())
             val userDetails = UserDetailsImpl(findUser)
             return UsernamePasswordAuthenticationToken(userDetails, token, userDetails.authorities)
         } catch (e: Exception) {

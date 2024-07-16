@@ -17,7 +17,6 @@ class UserConverter(
 
     fun convert(request: CreateUserRequestDto): User {
         return User(
-            id = tsidFactory.create().toString(),
             email = request.email,
             password = passwordEncoder.encode(request.password),
             socialId = request.socialId,

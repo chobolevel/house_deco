@@ -25,7 +25,6 @@ class ProductConverter(
         val productCategory = productCategoryFinder.findById(request.productCategoryId)
         val brand = brandFinder.findById(request.brandId)
         return Product(
-            id = tsidFactory.create().toString(),
             name = request.name,
             status = ProductStatusType.PREPARING,
         ).also { product ->
@@ -39,7 +38,7 @@ class ProductConverter(
 
     fun convert(entity: Product): ProductResponseDto {
         return ProductResponseDto(
-            id = entity.id,
+            id = entity.id!!,
             category = productCategoryConverter.convert(entity.productCategory!!),
             brand = brandConverter.convert(entity.brand!!),
             name = entity.name,

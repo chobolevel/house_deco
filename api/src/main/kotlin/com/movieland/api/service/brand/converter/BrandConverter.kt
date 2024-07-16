@@ -13,7 +13,6 @@ class BrandConverter(
 
     fun convert(request: CreateBrandRequestDto): Brand {
         return Brand(
-            id = tsidFactory.create().toString(),
             name = request.name,
             link = request.link
         )
@@ -21,7 +20,7 @@ class BrandConverter(
 
     fun convert(entity: Brand): BrandResponseDto {
         return BrandResponseDto(
-            id = entity.id,
+            id = entity.id!!,
             name = entity.name,
             link = entity.link,
             createdAt = entity.createdAt!!.toInstant().toEpochMilli(),

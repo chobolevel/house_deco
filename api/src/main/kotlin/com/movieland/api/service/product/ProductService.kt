@@ -23,9 +23,9 @@ class ProductService(
 ) {
 
     @Transactional
-    fun createProduct(request: CreateProductRequestDto): String {
+    fun createProduct(request: CreateProductRequestDto): Long {
         val product = converter.convert(request)
-        return repository.save(product).id
+        return repository.save(product).id!!
     }
 
     @Transactional(readOnly = true)
@@ -45,20 +45,20 @@ class ProductService(
     }
 
     @Transactional(readOnly = true)
-    fun fetchProduct(id: String): ProductResponseDto {
+    fun fetchProduct(id: Long): ProductResponseDto {
         val product = finder.findById(id)
         return converter.convert(product)
     }
 
     @Transactional
-    fun updateProduct(id: String, request: UpdateProductRequestDto): String {
+    fun updateProduct(id: Long, request: UpdateProductRequestDto): Long {
         val product = finder.findById(id)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, product) }
-        return product.id
+        return product.id!!
     }
 
     @Transactional
-    fun deleteProduct(id: String): Boolean {
+    fun deleteProduct(id: Long): Boolean {
         val product = finder.findById(id)
         repository.delete(product)
         return true
