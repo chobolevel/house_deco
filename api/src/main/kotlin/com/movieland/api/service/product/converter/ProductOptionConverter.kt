@@ -1,6 +1,5 @@
 package com.movieland.api.service.product.converter
 
-import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.product.option.CreateProductOptionRequestDto
 import com.movieland.api.dto.product.option.CreateProductOptionRequestWithProductDto
 import com.movieland.api.dto.product.option.ProductOptionResponseDto
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class ProductOptionConverter(
-    private val tsidFactory: TsidFactory,
     private val productFinder: ProductFinder
 ) {
 

@@ -1,6 +1,5 @@
 package com.movieland.api.service.user.converter
 
-import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.UserResponseDto
 import com.movieland.domain.entity.user.User
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component
 @Component
 class UserConverter(
     private val passwordEncoder: BCryptPasswordEncoder,
-    private val tsidFactory: TsidFactory,
     private val userImageConverter: UserImageConverter
 ) {
 

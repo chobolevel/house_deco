@@ -1,6 +1,5 @@
 package com.movieland.api.service.product.converter
 
-import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.product.image.CreateProductImageRequestDto
 import com.movieland.api.dto.product.image.CreateProductImageRequestWithProductDto
 import com.movieland.api.dto.product.image.ProductImageResponseDto
@@ -10,9 +9,7 @@ import com.movieland.domain.entity.product.image.ProductImage
 import org.springframework.stereotype.Component
 
 @Component
-class ProductImageConverter(
-    private val tsidFactory: TsidFactory,
-) {
+class ProductImageConverter() {
 
     fun convert(request: CreateProductImageRequestDto, product: Product): ProductImage {
         return ProductImage(
