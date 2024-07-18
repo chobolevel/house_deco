@@ -7,7 +7,6 @@ import com.movieland.api.dto.product.option.ProductOptionResponseDto
 import com.movieland.domain.entity.product.Product
 import com.movieland.domain.entity.product.ProductFinder
 import com.movieland.domain.entity.product.option.ProductOption
-import com.movieland.domain.entity.product.option.ProductOptionStatus
 import com.movieland.domain.entity.product.option.ProductOptionType
 import org.springframework.stereotype.Component
 
@@ -21,7 +20,6 @@ class ProductOptionConverter(
         val product = productFinder.findById(request.productId)
         return ProductOption(
             type = request.type,
-            status = ProductOptionStatus.PREPARING,
             name = request.name,
             originalPrice = request.originalPrice,
             salePrice = request.originalPrice,
@@ -38,7 +36,6 @@ class ProductOptionConverter(
     ): ProductOption {
         return ProductOption(
             type = ProductOptionType.REQUIRED,
-            status = ProductOptionStatus.PREPARING,
             name = request.name,
             originalPrice = request.originalPrice,
             salePrice = request.salePrice,
@@ -55,7 +52,6 @@ class ProductOptionConverter(
     ): ProductOption {
         return ProductOption(
             type = ProductOptionType.OPTIONAL,
-            status = ProductOptionStatus.PREPARING,
             name = request.name,
             originalPrice = request.originalPrice,
             salePrice = request.salePrice,
@@ -70,7 +66,6 @@ class ProductOptionConverter(
         return ProductOptionResponseDto(
             id = entity.id!!,
             type = entity.type,
-            status = entity.status,
             name = entity.name,
             originalPrice = entity.originalPrice,
             salePrice = entity.salePrice,

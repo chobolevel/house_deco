@@ -27,9 +27,6 @@ class ProductOption(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var type: ProductOptionType,
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    var status: ProductOptionStatus,
     @Column(nullable = false)
     var name: String,
     @Column(nullable = false)
@@ -45,6 +42,9 @@ class ProductOption(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+
+    @Column(nullable = false)
+    var deleted: Boolean = false
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -63,10 +63,4 @@ class ProductOption(
 enum class ProductOptionType {
     REQUIRED,
     OPTIONAL
-}
-
-enum class ProductOptionStatus {
-    SALE,
-    PREPARING,
-    CLOSED
 }

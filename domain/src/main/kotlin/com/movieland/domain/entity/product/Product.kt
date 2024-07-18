@@ -4,7 +4,6 @@ import com.movieland.domain.entity.Audit
 import com.movieland.domain.entity.brand.Brand
 import com.movieland.domain.entity.product.category.ProductCategory
 import com.movieland.domain.entity.product.image.ProductImage
-import com.movieland.domain.entity.product.image.ProductImageType
 import com.movieland.domain.entity.product.option.ProductOption
 import com.movieland.domain.entity.product.option.ProductOptionType
 import jakarta.persistence.CascadeType
