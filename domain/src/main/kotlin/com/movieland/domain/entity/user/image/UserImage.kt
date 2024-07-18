@@ -8,6 +8,8 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
@@ -20,9 +22,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name = "user_images")
 @Audited
 class UserImage(
-    @Id
-    @Column(nullable = false, updatable = false)
-    var id: String? = null,
     @Column(nullable = false)
     var originUrl: String,
     @Column(nullable = false)
@@ -31,6 +30,10 @@ class UserImage(
     @Column(nullable = false)
     var type: UserImageType = UserImageType.PROFILE,
 ) : Audit() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")

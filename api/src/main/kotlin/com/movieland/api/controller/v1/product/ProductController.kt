@@ -43,8 +43,8 @@ class ProductController(
     @Operation(summary = "상품 정보 목록 조회 API")
     @GetMapping("/products")
     fun searchProductList(
-        @RequestParam(required = false) categoryId: String?,
-        @RequestParam(required = false) brandId: String?,
+        @RequestParam(required = false) categoryId: Long?,
+        @RequestParam(required = false) brandId: Long?,
         @RequestParam(required = false) name: String?,
         @RequestParam(required = false) skipCount: Long?,
         @RequestParam(required = false) limitCount: Long?,
@@ -58,7 +58,7 @@ class ProductController(
 
     @Operation(summary = "상품 정보 단건 조회 API")
     @GetMapping("/products/{id}")
-    fun fetchProduct(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun fetchProduct(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.fetchProduct(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -67,7 +67,7 @@ class ProductController(
     @Operation(summary = "상품 정보 수정 API")
     @PutMapping("/products/{id}")
     fun updateProduct(
-        @PathVariable id: String,
+        @PathVariable id: Long,
         @Valid @RequestBody
         request: UpdateProductRequestDto
     ): ResponseEntity<ResultResponse> {
@@ -78,7 +78,7 @@ class ProductController(
     @HasAuthorityAdmin
     @Operation(summary = "상품 정보 삭제 API")
     @DeleteMapping("/products/{id}")
-    fun deleteProduct(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun deleteProduct(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.deleteProduct(id)
         return ResponseEntity.ok(ResultResponse(result))
     }

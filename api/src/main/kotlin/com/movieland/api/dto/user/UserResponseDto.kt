@@ -8,7 +8,7 @@ import com.movieland.domain.entity.user.UserRoleType
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class UserResponseDto(
-    val id: String,
+    val id: Long,
     val email: String,
     val loginType: UserLoginType,
     val nickname: String,

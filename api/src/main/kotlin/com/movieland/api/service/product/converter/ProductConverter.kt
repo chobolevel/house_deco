@@ -1,6 +1,5 @@
 package com.movieland.api.service.product.converter
 
-import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.product.CreateProductRequestDto
 import com.movieland.api.dto.product.ProductResponseDto
 import com.movieland.api.service.brand.converter.BrandConverter
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class ProductConverter(
-    private val tsidFactory: TsidFactory,
     private val productCategoryFinder: ProductCategoryFinder,
     private val brandFinder: BrandFinder,
     private val productOptionConverter: ProductOptionConverter,
@@ -25,7 +23,6 @@ class ProductConverter(
         val productCategory = productCategoryFinder.findById(request.productCategoryId)
         val brand = brandFinder.findById(request.brandId)
         return Product(
-            id = tsidFactory.create().toString(),
             name = request.name,
             status = ProductStatusType.PREPARING,
         ).also { product ->
@@ -39,7 +36,7 @@ class ProductConverter(
 
     fun convert(entity: Product): ProductResponseDto {
         return ProductResponseDto(
-            id = entity.id,
+            id = entity.id!!,
             category = productCategoryConverter.convert(entity.productCategory!!),
             brand = brandConverter.convert(entity.brand!!),
             name = entity.name,

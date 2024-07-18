@@ -1,19 +1,15 @@
 package com.movieland.api.service.user.converter
 
-import com.github.f4b6a3.tsid.TsidFactory
 import com.movieland.api.dto.user.point.CreateUserPointRequestDto
 import com.movieland.api.dto.user.point.UserPointResponseDto
 import com.movieland.domain.entity.user.point.UserPoint
 import org.springframework.stereotype.Component
 
 @Component
-class UserPointConverter(
-    private val tsidFactory: TsidFactory
-) {
+class UserPointConverter() {
 
     fun convert(request: CreateUserPointRequestDto): UserPoint {
         return UserPoint(
-            id = tsidFactory.create().toString(),
             currency = request.currency,
             type = request.type,
             description = request.description,

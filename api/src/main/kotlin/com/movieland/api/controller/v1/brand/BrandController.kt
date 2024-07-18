@@ -56,7 +56,7 @@ class BrandController(
 
     @Operation(summary = "브랜드 정보 단건 조회 API")
     @GetMapping("/brands/{id}")
-    fun fetchBrand(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun fetchBrand(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.fetchBrand(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -65,7 +65,7 @@ class BrandController(
     @Operation(summary = "브랜드 정보 수정 API")
     @PutMapping("/brands/{id}")
     fun updateBrand(
-        @PathVariable id: String,
+        @PathVariable id: Long,
         @Valid @RequestBody
         request: UpdateBrandRequestDto
     ): ResponseEntity<ResultResponse> {
@@ -76,7 +76,7 @@ class BrandController(
     @HasAuthorityAdmin
     @Operation(summary = "브랜드 정보 삭제 API")
     @DeleteMapping("/brands/{id}")
-    fun deleteBrand(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun deleteBrand(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.deleteBrand(id)
         return ResponseEntity.ok(ResultResponse(result))
     }

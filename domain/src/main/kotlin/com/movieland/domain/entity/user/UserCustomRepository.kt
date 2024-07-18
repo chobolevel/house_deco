@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class UserCustomRepository : QuerydslRepositorySupport(User::class.java) {
 
-    fun findById(id: String): User? {
+    fun findById(id: Long): User? {
         return from(user)
             .where(user.id.eq(id))
             .fetchOne()

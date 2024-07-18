@@ -23,13 +23,13 @@ class ProductCategoryService(
     private val updaters: List<ProductCategoryUpdatable>
 ) {
 
-    fun createProductCategory(request: CreateProductCategoryRequestDto): String {
+    fun createProductCategory(request: CreateProductCategoryRequestDto): Long {
         val productCategory = converter.convert(request)
         request.parentId?.let {
             val parent = finder.findById(it)
             productCategory.setBy(parent)
         }
-        return repository.save(productCategory).id
+        return repository.save(productCategory).id!!
     }
 
     fun searchProductCategoryList(
@@ -47,18 +47,18 @@ class ProductCategoryService(
         )
     }
 
-    fun fetchProductCategory(id: String): ProductCategoryResponseDto {
+    fun fetchProductCategory(id: Long): ProductCategoryResponseDto {
         val productCategory = finder.findById(id)
         return converter.convert(productCategory)
     }
 
-    fun updateProductCategory(id: String, request: UpdateProductCategoryRequestDto): String {
+    fun updateProductCategory(id: Long, request: UpdateProductCategoryRequestDto): Long {
         val productCategory = finder.findById(id)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, productCategory) }
-        return productCategory.id
+        return productCategory.id!!
     }
 
-    fun deleteProductCategory(id: String): Boolean {
+    fun deleteProductCategory(id: Long): Boolean {
         val productCategory = finder.findById(id)
         repository.delete(productCategory)
         return true

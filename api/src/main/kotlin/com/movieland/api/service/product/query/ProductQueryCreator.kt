@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 @Component
 class ProductQueryCreator {
 
-    fun createQueryFilter(productCategoryId: String?, brandId: String?, name: String?): ProductQueryFilter {
+    fun createQueryFilter(productCategoryId: Long?, brandId: Long?, name: String?): ProductQueryFilter {
         return ProductQueryFilter(
             productCategoryId = productCategoryId,
             brandId = brandId,

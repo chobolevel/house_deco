@@ -18,7 +18,7 @@ class ProductCategoryUpdater(
         request.updateMask.forEach {
             when (it) {
                 ProductCategoryUpdateMask.PARENT -> {
-                    if (request.parentId.isNullOrEmpty()) {
+                    if (request.parentId == null) {
                         productCategory.resetParent()
                     } else {
                         val parent = finder.findById(request.parentId)

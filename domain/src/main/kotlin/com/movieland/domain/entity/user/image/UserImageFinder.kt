@@ -12,7 +12,7 @@ class UserImageFinder(
 ) {
 
     @Throws(DataNotFoundException::class)
-    fun findById(id: String): UserImage {
+    fun findById(id: Long): UserImage {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_IMAGE_IS_NOT_FOUND,
             message = "유저 이미지를 찾을 수 없습니다."
@@ -20,7 +20,7 @@ class UserImageFinder(
     }
 
     @Throws(DataNotFoundException::class)
-    fun findByIdAndUserId(id: String, userId: String): UserImage {
+    fun findByIdAndUserId(id: Long, userId: Long): UserImage {
         return repository.findByIdAndUserId(id, userId) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_IMAGE_IS_NOT_FOUND,
             message = "유저 이미지를 찾을 수 없습니다."

@@ -16,7 +16,7 @@ class BrandFinder(
 ) {
 
     @Throws(DataNotFoundException::class)
-    fun findById(id: String): Brand {
+    fun findById(id: Long): Brand {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.BRAND_IS_NOT_FOUND,
             message = "브랜드 정보를 찾을 수 없습니다."

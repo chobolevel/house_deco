@@ -8,6 +8,8 @@ import jakarta.persistence.EntityListeners
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -24,9 +26,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @SQLDelete(sql = "UPDATE product_images SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 class ProductImage(
-    @Id
-    @Column(nullable = false, updatable = false)
-    var id: String,
     @Column(nullable = false)
     var originUrl: String,
     @Column(nullable = false)
@@ -35,6 +34,10 @@ class ProductImage(
     @Column(nullable = false)
     var type: ProductImageType,
 ) : Audit() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")

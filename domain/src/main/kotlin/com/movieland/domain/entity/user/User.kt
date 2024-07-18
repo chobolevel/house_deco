@@ -8,6 +8,8 @@ import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
@@ -21,9 +23,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Audited
 @Where(clause = "deleted = false")
 class User(
-    @Id
-    @Column(nullable = false, updatable = false)
-    var id: String? = null,
     @Column(nullable = false)
     var email: String,
     @Column(nullable = false)
@@ -41,6 +40,10 @@ class User(
     @Column(nullable = false)
     var role: UserRoleType = UserRoleType.ROLE_USER,
 ) : Audit() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
     @Column(nullable = false)
     var point: Int = 0

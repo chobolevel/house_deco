@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class ProductCategoryResponseDto(
-    val id: String,
+    val id: Long,
     val name: String,
     val categories: List<ProductCategoryResponseDto>
 )

@@ -4,8 +4,8 @@ import com.movieland.domain.entity.product.QProduct.product
 import com.querydsl.core.types.dsl.BooleanExpression
 
 class ProductQueryFilter(
-    private val productCategoryId: String?,
-    private val brandId: String?,
+    private val productCategoryId: Long?,
+    private val brandId: Long?,
     private val name: String?,
 ) {
 

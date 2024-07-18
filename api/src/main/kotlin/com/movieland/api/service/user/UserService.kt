@@ -37,7 +37,7 @@ class UserService(
 ) {
 
     @Throws(ParameterInvalidException::class)
-    fun createUser(request: CreateUserRequestDto): String {
+    fun createUser(request: CreateUserRequestDto): Long {
         val emailExists = userFinder.existsByEmail(request.email)
         val nicknameExists = userFinder.existsByNickname(request.nickname)
         val phoneExists = userFinder.existsByPhone(request.phone)
@@ -108,18 +108,18 @@ class UserService(
         )
     }
 
-    fun fetchUser(id: String): UserResponseDto {
+    fun fetchUser(id: Long): UserResponseDto {
         val user = userFinder.findById(id)
         return userConverter.convert(user)
     }
 
-    fun updateUser(id: String, request: UpdateUserRequestDto): String {
+    fun updateUser(id: Long, request: UpdateUserRequestDto): Long {
         val user = userFinder.findById(id)
         userUpdaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, user) }
         return user.id!!
     }
 
-    fun deleteUser(id: String): Boolean {
+    fun deleteUser(id: Long): Boolean {
         val user = userFinder.findById(id)
         user.resign()
         return true

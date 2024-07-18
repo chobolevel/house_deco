@@ -63,9 +63,6 @@ subprojects {
         // starter
         implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
-        // TSID
-        implementation("com.github.f4b6a3:tsid-creator:5.2.6")
-
         // jackson
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
         implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
