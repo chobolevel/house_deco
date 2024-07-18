@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserPointQueryCreator {
 
-    fun createQueryFilter(userId: String?, type: UserPointType?): UserPointQueryFilter {
+    fun createQueryFilter(userId: Long?, type: UserPointType?): UserPointQueryFilter {
         return UserPointQueryFilter(
             userId = userId,
             type = type

@@ -6,7 +6,7 @@ import com.movieland.domain.entity.user.point.UserPointType
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class UserPointResponseDto(
-    val id: String,
+    val id: Long,
     val currency: Int,
     val type: UserPointType,
     val description: String,

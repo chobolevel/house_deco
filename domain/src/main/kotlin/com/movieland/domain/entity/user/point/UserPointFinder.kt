@@ -16,14 +16,14 @@ class UserPointFinder(
 ) {
 
     @Throws(DataNotFoundException::class)
-    fun findById(id: String): UserPoint {
+    fun findById(id: Long): UserPoint {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_POINT_IS_NOT_FOUND,
             message = "해당 유저 포인트 내역을 찾을 수 없습니다."
         )
     }
 
-    fun findByIdAndUserId(id: String, userId: String): UserPoint {
+    fun findByIdAndUserId(id: Long, userId: Long): UserPoint {
         return repository.findByIdAndUserId(id, userId) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_POINT_IS_NOT_FOUND,
             message = "해당 유저 포인트 내역을 찾을 수 없습니다."

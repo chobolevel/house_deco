@@ -6,7 +6,6 @@ import com.movieland.domain.entity.brand.BrandFinder
 import com.movieland.domain.entity.product.Product
 import com.movieland.domain.entity.product.ProductUpdateMask
 import com.movieland.domain.entity.product.category.ProductCategoryFinder
-import com.movieland.domain.entity.product.image.ProductImageType
 import org.springframework.stereotype.Component
 
 @Component

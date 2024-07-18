@@ -26,7 +26,7 @@ class UserFinder(
     }
 
     @Throws(DataNotFoundException::class)
-    fun findById(id: String): User {
+    fun findById(id: Long): User {
         return userCustomRepository.findById(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.USER_IS_NOT_FOUND,
             message = "회원 정보를 찾을 수 없습니다."

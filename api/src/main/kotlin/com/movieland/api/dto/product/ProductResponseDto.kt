@@ -10,7 +10,7 @@ import com.movieland.domain.entity.product.ProductStatusType
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class ProductResponseDto(
-    val id: String,
+    val id: Long,
     val category: ProductCategoryResponseDto,
     val brand: BrandResponseDto,
     val name: String,

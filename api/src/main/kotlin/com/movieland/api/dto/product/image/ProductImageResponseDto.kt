@@ -6,7 +6,7 @@ import com.movieland.domain.entity.product.image.ProductImageType
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class ProductImageResponseDto(
-    val id: String,
+    val id: Long,
     val originUrl: String,
     val name: String,
     val type: ProductImageType,

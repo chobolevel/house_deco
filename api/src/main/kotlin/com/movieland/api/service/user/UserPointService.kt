@@ -25,7 +25,7 @@ class UserPointService(
     private val userFinder: UserFinder
 ) {
 
-    fun createUserPoint(userId: String, request: CreateUserPointRequestDto): String {
+    fun createUserPoint(userId: Long, request: CreateUserPointRequestDto): Long {
         val user = userFinder.findById(userId)
         val userPoint = converter.convert(request).also {
             it.setBy(user)
@@ -49,18 +49,18 @@ class UserPointService(
         )
     }
 
-    fun fetchUserPoint(userId: String, id: String): UserPointResponseDto {
+    fun fetchUserPoint(userId: Long, id: Long): UserPointResponseDto {
         val userPoint = finder.findByIdAndUserId(id, userId)
         return converter.convert(userPoint)
     }
 
-    fun updateUserPoint(userId: String, id: String, request: UpdateUserPointRequestDto): String {
+    fun updateUserPoint(userId: Long, id: Long, request: UpdateUserPointRequestDto): Long {
         val userPoint = finder.findByIdAndUserId(id, userId)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, userPoint) }
         return userPoint.id!!
     }
 
-    fun deleteUserPoint(userId: String, id: String): Boolean {
+    fun deleteUserPoint(userId: Long, id: Long): Boolean {
         val userPoint = finder.findByIdAndUserId(id, userId)
         userPoint.delete()
         return true

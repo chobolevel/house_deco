@@ -4,7 +4,7 @@ import com.movieland.domain.entity.user.point.QUserPoint.userPoint
 import com.querydsl.core.types.dsl.BooleanExpression
 
 class UserPointQueryFilter(
-    val userId: String?,
+    val userId: Long?,
     val type: UserPointType?
 ) {
 

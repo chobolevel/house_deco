@@ -85,7 +85,7 @@ class UserController(
 
     @Operation(summary = "유저 단건 조회 API")
     @GetMapping("/users/{id}")
-    fun fetchUser(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun fetchUser(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = userService.fetchUser(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -94,7 +94,7 @@ class UserController(
     @GetMapping("/users/me")
     @HasAuthorityUser
     fun me(principal: Principal): ResponseEntity<ResultResponse> {
-        val result = userService.fetchUser(principal.name)
+        val result = userService.fetchUser(principal.name.toLong())
         return ResponseEntity.ok(ResultResponse(result))
     }
 

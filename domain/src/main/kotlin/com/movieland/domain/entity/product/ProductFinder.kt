@@ -16,7 +16,7 @@ class ProductFinder(
 ) {
 
     @Throws(DataNotFoundException::class)
-    fun findById(id: String): Product {
+    fun findById(id: Long): Product {
         return repository.findByIdOrNull(id) ?: throw DataNotFoundException(
             errorCode = ErrorCode.PRODUCT_IS_NOT_FOUND,
             message = "상품을 찾을 수 없습니다."

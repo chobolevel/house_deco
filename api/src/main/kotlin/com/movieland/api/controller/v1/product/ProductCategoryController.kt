@@ -56,7 +56,7 @@ class ProductCategoryController(
 
     @Operation(summary = "상품 카테고리 단건 조회 API")
     @GetMapping("/products/categories/{id}")
-    fun fetchProductCategory(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun fetchProductCategory(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.fetchProductCategory(id)
         return ResponseEntity.ok(ResultResponse(result))
     }
@@ -65,7 +65,7 @@ class ProductCategoryController(
     @Operation(summary = "상품 카테고리 정보 수정 API")
     @PutMapping("/products/categories/{id}")
     fun updateProductCategory(
-        @PathVariable id: String,
+        @PathVariable id: Long,
         @Valid @RequestBody
         request: UpdateProductCategoryRequestDto
     ): ResponseEntity<ResultResponse> {
@@ -76,7 +76,7 @@ class ProductCategoryController(
     @HasAuthorityAdmin
     @Operation(summary = "상품 카테고리 삭제 API")
     @DeleteMapping("/products/categories/{id}")
-    fun deleteProductCategory(@PathVariable id: String): ResponseEntity<ResultResponse> {
+    fun deleteProductCategory(@PathVariable id: Long): ResponseEntity<ResultResponse> {
         val result = service.deleteProductCategory(id)
         return ResponseEntity.ok(ResultResponse(result))
     }

@@ -3,7 +3,6 @@ package com.movieland.api.dto.product
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import com.movieland.api.dto.product.image.CreateProductImageRequestWithProductDto
-import com.movieland.api.dto.product.image.UpdateProductImageRequestDto
 import com.movieland.api.dto.product.image.UpdateProductImageRequestWithProductDto
 import com.movieland.api.dto.product.option.CreateProductOptionRequestWithProductDto
 import com.movieland.domain.entity.product.ProductStatusType
@@ -14,10 +13,10 @@ import jakarta.validation.constraints.NotNull
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class CreateProductRequestDto(
-    @field:NotBlank(message = "상품 카테고리는 필수 값입니다.")
-    val productCategoryId: String,
-    @field:NotBlank(message = "상품 브랜드는 필수 값입니다.")
-    val brandId: String,
+    @field:NotNull(message = "상품 카테고리는 필수 값입니다.")
+    val productCategoryId: Long,
+    @field:NotNull(message = "상품 브랜드는 필수 값입니다.")
+    val brandId: Long,
     @field:NotBlank(message = "상품명은 필수 값입니다.")
     val name: String,
     @field:NotNull(message = "상품 메인 이미지는 필수 값입니다.")
@@ -31,8 +30,8 @@ data class CreateProductRequestDto(
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class UpdateProductRequestDto(
-    val productCategoryId: String?,
-    val brandId: String?,
+    val productCategoryId: Long?,
+    val brandId: Long?,
     val name: String?,
     val status: ProductStatusType?,
     val images: List<UpdateProductImageRequestWithProductDto>?,
