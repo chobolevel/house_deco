@@ -64,3 +64,11 @@ enum class ProductOptionType {
     REQUIRED,
     OPTIONAL
 }
+
+enum class ProductOptionUpdateMask {
+    NAME,
+    ORIGINAL_PRICE,
+    SALE_PRICE,
+    STOCK,
+    ORDER
+}
