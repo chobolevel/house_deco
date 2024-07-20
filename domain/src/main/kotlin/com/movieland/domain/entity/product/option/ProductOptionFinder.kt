@@ -2,7 +2,6 @@ package com.movieland.domain.entity.product.option
 
 import com.movieland.domain.exception.DataNotFoundException
 import com.movieland.domain.exception.ErrorCode
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import kotlin.jvm.Throws
 

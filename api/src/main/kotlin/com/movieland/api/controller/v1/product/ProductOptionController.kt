@@ -27,7 +27,8 @@ class ProductOptionController(
     @PostMapping("/products/{productId}/options")
     fun createProductOption(
         @PathVariable productId: Long,
-        @Valid @RequestBody request: CreateProductOptionRequestDto
+        @Valid @RequestBody
+        request: CreateProductOptionRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.createProductOption(request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -38,7 +39,8 @@ class ProductOptionController(
     fun updateProductOption(
         @PathVariable productId: Long,
         @PathVariable optionId: Long,
-        @Valid @RequestBody request: UpdateProductOptionRequestDto
+        @Valid @RequestBody
+        request: UpdateProductOptionRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateProductOption(optionId, request)
         return ResponseEntity.ok(ResultResponse(result))
