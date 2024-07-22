@@ -5,7 +5,6 @@ import com.movieland.domain.entity.brand.BrandUpdateMask
 import com.movieland.domain.exception.ErrorCode
 import com.movieland.domain.exception.ParameterInvalidException
 import org.springframework.stereotype.Component
-import java.security.InvalidParameterException
 
 @Component
 class BrandUpdateValidator : BrandUpdateValidatable {

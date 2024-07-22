@@ -7,7 +7,6 @@ import com.movieland.api.dto.product.UpdateProductRequestDto
 import com.movieland.api.service.product.converter.ProductConverter
 import com.movieland.api.service.product.updater.ProductUpdatable
 import com.movieland.api.service.product.validator.ProductUpdateValidatable
-import com.movieland.api.service.product.validator.ProductUpdateValidator
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.ProductFinder
 import com.movieland.domain.entity.product.ProductOrderType
