@@ -6,6 +6,7 @@ import com.movieland.api.dto.product.category.ProductCategoryResponseDto
 import com.movieland.api.dto.product.category.UpdateProductCategoryRequestDto
 import com.movieland.api.service.product.converter.ProductCategoryConverter
 import com.movieland.api.service.product.updater.ProductCategoryUpdatable
+import com.movieland.api.service.product.validator.ProductCategoryUpdateValidatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.category.ProductCategoryFinder
 import com.movieland.domain.entity.product.category.ProductCategoryOrderType
@@ -20,6 +21,7 @@ class ProductCategoryService(
     private val repository: ProductCategoryRepository,
     private val finder: ProductCategoryFinder,
     private val converter: ProductCategoryConverter,
+    private val updateValidators: List<ProductCategoryUpdateValidatable>,
     private val updaters: List<ProductCategoryUpdatable>
 ) {
 
@@ -53,6 +55,7 @@ class ProductCategoryService(
     }
 
     fun updateProductCategory(id: Long, request: UpdateProductCategoryRequestDto): Long {
+        updateValidators.forEach { it.validate(request) }
         val productCategory = finder.findById(id)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, productCategory) }
         return productCategory.id!!
