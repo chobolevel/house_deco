@@ -6,6 +6,7 @@ import com.movieland.api.dto.brand.UpdateBrandRequestDto
 import com.movieland.api.dto.common.PaginationResponseDto
 import com.movieland.api.service.brand.converter.BrandConverter
 import com.movieland.api.service.brand.updater.BrandUpdatable
+import com.movieland.api.service.brand.validator.BrandUpdateValidatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.brand.BrandFinder
 import com.movieland.domain.entity.brand.BrandOrderType
@@ -19,6 +20,7 @@ class BrandService(
     private val repository: BrandRepository,
     private val finder: BrandFinder,
     private val converter: BrandConverter,
+    private val updateValidators: List<BrandUpdateValidatable>,
     private val updaters: List<BrandUpdatable>
 ) {
 
@@ -52,6 +54,7 @@ class BrandService(
 
     @Transactional
     fun updateBrand(id: Long, request: UpdateBrandRequestDto): Long {
+        updateValidators.forEach { it.validate(request) }
         val brand = finder.findById(id)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, brand) }
         return brand.id!!
