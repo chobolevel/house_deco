@@ -31,7 +31,7 @@ class ProductUpdateValidator : ProductUpdateValidatable {
                 }
 
                 ProductUpdateMask.NAME -> {
-                    if (request.name == null) {
+                    if (request.name.isNullOrEmpty()) {
                         throw ParameterInvalidException(
                             errorCode = ErrorCode.PRODUCT_NAME_IS_NULL,
                             message = "변경할 상품 이름이 누락되었습니다."
