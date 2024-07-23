@@ -37,7 +37,7 @@ class ProductConverter(
     fun convert(entity: Product): ProductResponseDto {
         return ProductResponseDto(
             id = entity.id!!,
-            category = productCategoryConverter.convert(entity.productCategory!!),
+            category = productCategoryConverter.convertToSimple(entity.productCategory!!),
             brand = brandConverter.convert(entity.brand!!),
             name = entity.name,
             status = entity.status,
