@@ -3,7 +3,6 @@ package com.movieland.api.dto.product
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import com.movieland.api.dto.brand.BrandResponseDto
-import com.movieland.api.dto.product.category.ProductCategoryResponseDto
 import com.movieland.api.dto.product.category.ProductCategorySimpleResponseDto
 import com.movieland.api.dto.product.image.ProductImageResponseDto
 import com.movieland.api.dto.product.option.ProductOptionResponseDto
