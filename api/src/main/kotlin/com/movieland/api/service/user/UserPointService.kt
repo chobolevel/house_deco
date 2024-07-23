@@ -6,8 +6,10 @@ import com.movieland.api.dto.user.point.UpdateUserPointRequestDto
 import com.movieland.api.dto.user.point.UserPointResponseDto
 import com.movieland.api.service.user.converter.UserPointConverter
 import com.movieland.api.service.user.updater.UserPointUpdatable
+import com.movieland.api.service.user.validator.UpdateUserPointValidatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.user.UserFinder
+import com.movieland.domain.entity.user.UserPointOperationMask
 import com.movieland.domain.entity.user.point.UserPointFinder
 import com.movieland.domain.entity.user.point.UserPointOrderType
 import com.movieland.domain.entity.user.point.UserPointQueryFilter
@@ -21,16 +23,15 @@ class UserPointService(
     private val repository: UserPointRepository,
     private val finder: UserPointFinder,
     private val converter: UserPointConverter,
+    private val updateValidators: List<UpdateUserPointValidatable>,
     private val updaters: List<UserPointUpdatable>,
     private val userFinder: UserFinder
 ) {
 
     fun createUserPoint(userId: Long, request: CreateUserPointRequestDto): Long {
         val user = userFinder.findById(userId)
-        val userPoint = converter.convert(request).also {
-            it.setBy(user)
-        }
-        user.point += userPoint.currency
+        val userPoint = converter.convert(request, user)
+        user.syncPoint(UserPointOperationMask.INCREASE, userPoint.currency)
         return repository.save(userPoint).id!!
     }
 
@@ -55,6 +56,7 @@ class UserPointService(
     }
 
     fun updateUserPoint(userId: Long, id: Long, request: UpdateUserPointRequestDto): Long {
+        updateValidators.forEach { it.validate(request) }
         val userPoint = finder.findByIdAndUserId(id, userId)
         updaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, userPoint) }
         return userPoint.id!!

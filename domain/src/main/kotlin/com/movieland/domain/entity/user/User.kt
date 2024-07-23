@@ -57,6 +57,13 @@ class User(
     fun resign() {
         this.deleted = true
     }
+
+    fun syncPoint(userPointOperationMask: UserPointOperationMask, changePoint: Int) {
+        when (userPointOperationMask) {
+            UserPointOperationMask.INCREASE -> this.point += changePoint
+            UserPointOperationMask.DECREASE -> this.point -= changePoint
+        }
+    }
 }
 
 enum class UserLoginType {
@@ -84,4 +91,9 @@ enum class UserOrderType {
 enum class UserUpdateMaskType {
     NICKNAME,
     PHONE
+}
+
+enum class UserPointOperationMask {
+    INCREASE,
+    DECREASE
 }
