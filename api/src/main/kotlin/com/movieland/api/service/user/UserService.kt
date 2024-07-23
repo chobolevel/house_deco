@@ -10,6 +10,8 @@ import com.movieland.api.dto.user.UserResponseDto
 import com.movieland.api.security.TokenProvider
 import com.movieland.api.service.user.converter.UserConverter
 import com.movieland.api.service.user.updater.UserUpdatable
+import com.movieland.api.service.user.validator.CreateUserValidatable
+import com.movieland.api.service.user.validator.UpdateUserValidatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.user.UserFinder
 import com.movieland.domain.entity.user.UserLoginType
@@ -29,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional
 class UserService(
     private val userRepository: UserRepository,
     private val userFinder: UserFinder,
+    private val createValidators: List<CreateUserValidatable>,
+    private val updateValidators: List<UpdateUserValidatable>,
     private val authenticationManager: UserAuthenticationManager,
     private val userConverter: UserConverter,
     private val userUpdaters: MutableList<out UserUpdatable>,
@@ -38,27 +42,7 @@ class UserService(
 
     @Throws(ParameterInvalidException::class)
     fun createUser(request: CreateUserRequestDto): Long {
-        val emailExists = userFinder.existsByEmail(request.email)
-        val nicknameExists = userFinder.existsByNickname(request.nickname)
-        val phoneExists = userFinder.existsByPhone(request.phone)
-        if (emailExists) {
-            throw ParameterInvalidException(
-                errorCode = ErrorCode.EMAIL_ALREADY_EXISTS,
-                message = "이미 존재하는 이메일입니다."
-            )
-        }
-        if (nicknameExists) {
-            throw ParameterInvalidException(
-                errorCode = ErrorCode.NICKNAME_ALREADY_EXISTS,
-                message = "이미 존재하는 닉네임입니다."
-            )
-        }
-        if (phoneExists) {
-            throw ParameterInvalidException(
-                errorCode = ErrorCode.PHONE_ALREADY_EXISTS,
-                message = "이미 존재하는 전화번호입니다."
-            )
-        }
+        createValidators.forEach { it.validate(request) }
         val user = userConverter.convert(request)
         return userRepository.save(user).id!!
     }
@@ -114,6 +98,7 @@ class UserService(
     }
 
     fun updateUser(id: Long, request: UpdateUserRequestDto): Long {
+        updateValidators.forEach { it.validate(request) }
         val user = userFinder.findById(id)
         userUpdaters.sortedBy { it.order() }.forEach { it.markAsUpdate(request, user) }
         return user.id!!
