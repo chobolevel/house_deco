@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import com.movieland.api.dto.brand.BrandResponseDto
 import com.movieland.api.dto.product.category.ProductCategoryResponseDto
+import com.movieland.api.dto.product.category.ProductCategorySimpleResponseDto
 import com.movieland.api.dto.product.image.ProductImageResponseDto
 import com.movieland.api.dto.product.option.ProductOptionResponseDto
 import com.movieland.domain.entity.product.ProductStatusType
@@ -11,7 +12,7 @@ import com.movieland.domain.entity.product.ProductStatusType
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class ProductResponseDto(
     val id: Long,
-    val category: ProductCategoryResponseDto,
+    val category: ProductCategorySimpleResponseDto,
     val brand: BrandResponseDto,
     val name: String,
     val status: ProductStatusType,
