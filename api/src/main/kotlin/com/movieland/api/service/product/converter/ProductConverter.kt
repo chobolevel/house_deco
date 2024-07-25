@@ -16,7 +16,8 @@ class ProductConverter(
     private val productOptionConverter: ProductOptionConverter,
     private val productCategoryConverter: ProductCategoryConverter,
     private val brandConverter: BrandConverter,
-    private val productImageConverter: ProductImageConverter
+    private val productImageConverter: ProductImageConverter,
+    private val productCouponConverter: ProductCouponConverter
 ) {
 
     fun convert(request: CreateProductRequestDto): Product {
@@ -47,6 +48,7 @@ class ProductConverter(
             images = entity.images.map { productImageConverter.convert(it) },
             requiredOptions = entity.getRequiredOptions().map { productOptionConverter.convert(it) },
             optionalOptions = entity.getOptionalOptions().map { productOptionConverter.convert(it) },
+            coupons = entity.coupons.map { productCouponConverter.convert(it) },
             createdAt = entity.createdAt!!.toInstant().toEpochMilli(),
             updatedAt = entity.updatedAt!!.toInstant().toEpochMilli()
         )

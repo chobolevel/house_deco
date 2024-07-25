@@ -1,4 +1,4 @@
-package com.movieland.api.service.product.validator
+package com.movieland.api.service.product.validator.option
 
 import com.movieland.api.dto.product.option.UpdateProductOptionRequestDto
 
