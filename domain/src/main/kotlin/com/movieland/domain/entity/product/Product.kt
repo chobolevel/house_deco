@@ -3,6 +3,7 @@ package com.movieland.domain.entity.product
 import com.movieland.domain.entity.Audit
 import com.movieland.domain.entity.brand.Brand
 import com.movieland.domain.entity.product.category.ProductCategory
+import com.movieland.domain.entity.product.coupon.ProductCoupon
 import com.movieland.domain.entity.product.image.ProductImage
 import com.movieland.domain.entity.product.option.ProductOption
 import com.movieland.domain.entity.product.option.ProductOptionType
@@ -68,6 +69,9 @@ class Product(
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     val options = mutableListOf<ProductOption>()
 
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val coupons = mutableListOf<ProductCoupon>()
+
     fun getRequiredOptions(): List<ProductOption> {
         return this.options.filter { it.type == ProductOptionType.REQUIRED }
     }
@@ -100,6 +104,12 @@ class Product(
 
     fun deleteAllImages() {
         this.images.forEach { it.deleted = true }
+    }
+
+    fun addCoupon(productCoupon: ProductCoupon) {
+        if (this.coupons.contains(productCoupon).not()) {
+            this.coupons.add(productCoupon)
+        }
     }
 }
 

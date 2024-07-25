@@ -4,7 +4,7 @@ import com.movieland.api.dto.product.option.CreateProductOptionRequestDto
 import com.movieland.api.dto.product.option.UpdateProductOptionRequestDto
 import com.movieland.api.service.product.converter.ProductOptionConverter
 import com.movieland.api.service.product.updater.ProductOptionUpdatable
-import com.movieland.api.service.product.validator.ProductOptionUpdateValidatable
+import com.movieland.api.service.product.validator.option.ProductOptionUpdateValidatable
 import com.movieland.domain.entity.product.ProductFinder
 import com.movieland.domain.entity.product.option.ProductOptionFinder
 import com.movieland.domain.entity.product.option.ProductOptionRepository
