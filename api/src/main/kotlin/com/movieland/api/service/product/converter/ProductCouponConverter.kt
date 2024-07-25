@@ -4,7 +4,6 @@ import com.movieland.api.dto.product.coupon.CreateProductCouponRequestDto
 import com.movieland.api.dto.product.coupon.ProductCouponResponseDto
 import com.movieland.domain.entity.product.Product
 import com.movieland.domain.entity.product.coupon.ProductCoupon
-import com.movieland.domain.entity.product.coupon.ProductCouponRepository
 import org.springframework.stereotype.Component
 
 @Component

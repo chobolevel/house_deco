@@ -29,7 +29,8 @@ class ProductCouponController(
     @PostMapping("/products/{productId}/coupons")
     fun createProductCoupon(
         @PathVariable productId: Long,
-        @Valid @RequestBody request: CreateProductCouponRequestDto
+        @Valid @RequestBody
+        request: CreateProductCouponRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.createProductCoupon(productId, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -41,7 +42,8 @@ class ProductCouponController(
     fun updateProductCoupon(
         @PathVariable productId: Long,
         @PathVariable couponId: Long,
-        @Valid @RequestBody request: UpdateProductCouponRequestDto
+        @Valid @RequestBody
+        request: UpdateProductCouponRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateProductCoupon(productId, couponId, request)
         return ResponseEntity.ok(ResultResponse(result))

@@ -12,12 +12,14 @@ class ProductCouponUpdater : ProductCouponUpdatable {
         request.updateMask.forEach {
             when (it) {
                 ProductCouponUpdateMask.NAME -> productCoupon.name = request.name!!
-                ProductCouponUpdateMask.MIN_PURCHASE_AMOUNT -> productCoupon.minPurchaseAmount =
-                    request.minPurchaseAmount!!
+                ProductCouponUpdateMask.MIN_PURCHASE_AMOUNT ->
+                    productCoupon.minPurchaseAmount =
+                        request.minPurchaseAmount!!
 
                 ProductCouponUpdateMask.DISCOUNT_PERCENT -> productCoupon.discountPercent = request.discountPercent!!
-                ProductCouponUpdateMask.MAX_DISCOUNT_AMOUNT -> productCoupon.maxDiscountAmount =
-                    request.maxDiscountAmount!!
+                ProductCouponUpdateMask.MAX_DISCOUNT_AMOUNT ->
+                    productCoupon.maxDiscountAmount =
+                        request.maxDiscountAmount!!
 
                 ProductCouponUpdateMask.EXPIRED_AT -> productCoupon.expiredAt = request.expiredAt!!
             }

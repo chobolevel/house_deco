@@ -5,7 +5,6 @@ import com.movieland.api.dto.product.coupon.UpdateProductCouponRequestDto
 import com.movieland.api.service.product.converter.ProductCouponConverter
 import com.movieland.api.service.product.updater.ProductCouponUpdatable
 import com.movieland.api.service.product.validator.coupon.CreateProductCouponValidatable
-import com.movieland.api.service.product.validator.coupon.CreateProductCouponValidator
 import com.movieland.api.service.product.validator.coupon.UpdateProductCouponValidatable
 import com.movieland.domain.entity.product.ProductFinder
 import com.movieland.domain.entity.product.coupon.ProductCouponFinder
