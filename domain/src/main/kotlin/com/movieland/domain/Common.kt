@@ -1,7 +1,9 @@
 package com.movieland.domain
 
+import java.security.Principal
+
 data class Pagination(val skip: Long, val limit: Long)
 
-data class Name(
-    val name: String
-)
+fun Principal.getUserId(): Long {
+    return this.name.toLong()
+}

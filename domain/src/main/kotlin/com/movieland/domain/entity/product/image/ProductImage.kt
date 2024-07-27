@@ -57,7 +57,8 @@ class ProductImage(
 
 enum class ProductImageType {
     MAIN,
-    SUB
+    SUB,
+    DETAIL
 }
 
 enum class ProductImageUpdateMask {

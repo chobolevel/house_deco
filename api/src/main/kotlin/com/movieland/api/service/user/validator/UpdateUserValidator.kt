@@ -15,7 +15,7 @@ class UpdateUserValidator : UpdateUserValidatable {
                 UserUpdateMaskType.NICKNAME -> {
                     if (request.nickname.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_USER_NICKNAME,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 닉네임이 유효하지 않습니다."
                         )
                     }
@@ -25,7 +25,7 @@ class UpdateUserValidator : UpdateUserValidatable {
                     val regexp = "^\\d{10,11}$".toRegex()
                     if (request.phone.isNullOrEmpty() || regexp.matches(request.phone)) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_USER_PHONE,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 전화번호가 유효하지 않거나 형식이 올바르지 않습니다."
                         )
                     }

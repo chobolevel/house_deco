@@ -7,15 +7,14 @@ import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.LoginRequestDto
 import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
-import com.movieland.api.security.UserDetailsImpl
 import com.movieland.api.service.user.UserQueryCreator
 import com.movieland.api.service.user.UserService
 import com.movieland.domain.entity.user.UserOrderType
+import com.movieland.domain.getUserId
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -94,7 +93,7 @@ class UserController(
     @GetMapping("/users/me")
     @HasAuthorityUser
     fun me(principal: Principal): ResponseEntity<ResultResponse> {
-        val result = userService.fetchUser(principal.name.toLong())
+        val result = userService.fetchUser(principal.getUserId())
         return ResponseEntity.ok(ResultResponse(result))
     }
 
@@ -102,11 +101,11 @@ class UserController(
     @PutMapping("/users/{id}")
     @HasAuthorityUser
     fun updateUser(
+        principal: Principal,
         @PathVariable id: String,
         @RequestBody request: UpdateUserRequestDto,
-        @AuthenticationPrincipal userDetails: UserDetailsImpl
     ): ResponseEntity<ResultResponse> {
-        val result = userService.updateUser(userDetails.user.id!!, request)
+        val result = userService.updateUser(principal.getUserId(), request)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
@@ -114,10 +113,10 @@ class UserController(
     @DeleteMapping("/users/{id}")
     @HasAuthorityUser
     fun resignUser(
+        principal: Principal,
         @PathVariable id: String,
-        @AuthenticationPrincipal userDetails: UserDetailsImpl
     ): ResponseEntity<ResultResponse> {
-        val result = userService.deleteUser(userDetails.user.id!!)
+        val result = userService.deleteUser(principal.getUserId())
         return ResponseEntity.ok(ResultResponse(result))
     }
 }

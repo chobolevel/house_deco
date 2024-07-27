@@ -12,6 +12,7 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
@@ -93,12 +94,14 @@ class TokenProvider(
         } catch (e: ExpiredJwtException) {
             // 토큰 시간 만료
             throw PolicyException(
+                status = HttpStatus.UNAUTHORIZED,
                 errorCode = ErrorCode.EXPIRED_TOKEN,
                 message = "토큰이 만료되었습니다."
             )
         } catch (e: JwtException) {
             // 토큰 검증 불가능
             throw PolicyException(
+                status = HttpStatus.UNAUTHORIZED,
                 errorCode = ErrorCode.INVALID_TOKEN,
                 message = "유효하지 않은 토큰입니다."
             )

@@ -15,7 +15,7 @@ class ProductCategoryUpdateValidator : ProductCategoryUpdateValidatable {
                 ProductCategoryUpdateMask.PARENT -> {
                     if (request.parentId == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_CATEGORY_PARENT,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "유효하지 않은 부모 카테고리입니다."
                         )
                     }
@@ -24,7 +24,7 @@ class ProductCategoryUpdateValidator : ProductCategoryUpdateValidatable {
                 ProductCategoryUpdateMask.NAME -> {
                     if (request.name.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_CATEGORY_NAME,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "유효하지 않은 카테고리 이름입니다."
                         )
                     }
