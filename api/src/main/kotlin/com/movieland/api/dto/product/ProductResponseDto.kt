@@ -20,6 +20,7 @@ data class ProductResponseDto(
     val reviewAverage: Double,
     val salesCount: Int,
     val images: List<ProductImageResponseDto>,
+    val detailImages: List<ProductImageResponseDto>,
     val requiredOptions: List<ProductOptionResponseDto>,
     val optionalOptions: List<ProductOptionResponseDto>,
     val coupons: List<ProductCouponResponseDto>,

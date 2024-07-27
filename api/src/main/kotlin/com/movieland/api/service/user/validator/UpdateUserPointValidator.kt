@@ -15,7 +15,7 @@ class UpdateUserPointValidator : UpdateUserPointValidatable {
                 UserPointUpdateMask.CURRENCY -> {
                     if (request.currency == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_USER_POINT_CURRENCY,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 포인트가 유효하지 않습니다."
                         )
                     }
@@ -24,7 +24,7 @@ class UpdateUserPointValidator : UpdateUserPointValidatable {
                 UserPointUpdateMask.TYPE -> {
                     if (request.type == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_USER_POINT_TYPE,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 포인트 타입이 유효하지 않습니다."
                         )
                     }
@@ -33,7 +33,7 @@ class UpdateUserPointValidator : UpdateUserPointValidatable {
                 UserPointUpdateMask.DESCRIPTION -> {
                     if (request.description.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_USER_POINT_DESCRIPTION,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 포인트 상세가 유효하지 않습니다."
                         )
                     }

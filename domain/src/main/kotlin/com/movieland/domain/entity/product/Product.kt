@@ -5,6 +5,7 @@ import com.movieland.domain.entity.brand.Brand
 import com.movieland.domain.entity.product.category.ProductCategory
 import com.movieland.domain.entity.product.coupon.ProductCoupon
 import com.movieland.domain.entity.product.image.ProductImage
+import com.movieland.domain.entity.product.image.ProductImageType
 import com.movieland.domain.entity.product.option.ProductOption
 import com.movieland.domain.entity.product.option.ProductOptionType
 import jakarta.persistence.CascadeType
@@ -102,8 +103,20 @@ class Product(
         }
     }
 
-    fun deleteAllImages() {
-        this.images.forEach { it.deleted = true }
+    fun getMainImages(): List<ProductImage> {
+        return this.images.filter { it.type != ProductImageType.DETAIL }
+    }
+
+    fun getDetailImages(): List<ProductImage> {
+        return this.images.filter { it.type == ProductImageType.DETAIL }
+    }
+
+    fun deleteMainImages() {
+        this.images.filter { it.type != ProductImageType.DETAIL }.forEach { it.deleted = true }
+    }
+
+    fun deleteDetailImages() {
+        this.images.filter { it.type == ProductImageType.DETAIL }.forEach { it.deleted = true }
     }
 
     fun addCoupon(productCoupon: ProductCoupon) {
@@ -138,5 +151,6 @@ enum class ProductUpdateMask {
     NAME,
     STATUS,
     PRIORITY,
-    IMAGES
+    IMAGES,
+    DETAIL_IMAGES
 }

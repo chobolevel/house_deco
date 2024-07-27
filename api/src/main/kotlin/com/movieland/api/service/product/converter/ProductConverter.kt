@@ -30,6 +30,7 @@ class ProductConverter(
             product.setBy(productCategory)
             product.setBy(brand)
             request.images.map { productImageConverter.convert(it, product) }
+            request.detailImages.map { productImageConverter.convert(it, product) }
             request.requiredOptions.forEach { productOptionConverter.convertRequiredOptionWithProduct(it, product) }
             request.optionalOptions?.onEach { productOptionConverter.convertOptionOptionWithProduct(it, product) }
         }
@@ -45,7 +46,8 @@ class ProductConverter(
             reviewCount = entity.reviewCount,
             reviewAverage = entity.reviewAverage,
             salesCount = entity.salesCount,
-            images = entity.images.map { productImageConverter.convert(it) },
+            images = entity.getMainImages().map { productImageConverter.convert(it) },
+            detailImages = entity.getDetailImages().map { productImageConverter.convert(it) },
             requiredOptions = entity.getRequiredOptions().map { productOptionConverter.convert(it) },
             optionalOptions = entity.getOptionalOptions().map { productOptionConverter.convert(it) },
             coupons = entity.coupons.map { productCouponConverter.convert(it) },

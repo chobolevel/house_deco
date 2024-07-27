@@ -15,7 +15,7 @@ class BrandUpdateValidator : BrandUpdateValidatable {
                 BrandUpdateMask.NAME -> {
                     if (request.name.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_BRAND_NAME,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "잘못된 브랜드명입니다."
                         )
                     }
@@ -24,7 +24,7 @@ class BrandUpdateValidator : BrandUpdateValidatable {
                 BrandUpdateMask.LINK -> {
                     if (request.link.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_BRAND_LINK,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "잘못된 브랜드 링크입니다."
                         )
                     }

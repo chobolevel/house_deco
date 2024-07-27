@@ -48,7 +48,7 @@ open class ParameterInvalidException(
 
 open class PolicyException(
     override val errorCode: ErrorCode,
-    override val status: HttpStatus = HttpStatus.BAD_REQUEST,
+    override val status: HttpStatus,
     override val message: String,
     override val throwable: Throwable? = null
 ) : CustomWarnException(errorCode, status, message, throwable)
