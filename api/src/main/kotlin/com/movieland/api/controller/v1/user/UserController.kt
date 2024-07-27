@@ -7,7 +7,6 @@ import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.LoginRequestDto
 import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
-import com.movieland.api.security.UserDetailsImpl
 import com.movieland.api.service.user.UserQueryCreator
 import com.movieland.api.service.user.UserService
 import com.movieland.domain.entity.user.UserOrderType
@@ -16,7 +15,6 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

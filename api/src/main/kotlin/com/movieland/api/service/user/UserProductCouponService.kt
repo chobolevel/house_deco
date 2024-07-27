@@ -2,7 +2,6 @@ package com.movieland.api.service.user
 
 import com.movieland.api.dto.common.PaginationResponseDto
 import com.movieland.api.service.user.converter.UserProductCouponConverter
-import com.movieland.api.service.user.query.UserProductCouponQueryCreator
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.coupon.ProductCouponFinder
 import com.movieland.domain.entity.user.UserFinder

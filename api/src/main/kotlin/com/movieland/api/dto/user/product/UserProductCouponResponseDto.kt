@@ -2,7 +2,6 @@ package com.movieland.api.dto.user.product
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.databind.annotation.JsonNaming
-import com.movieland.api.dto.product.coupon.ProductCouponResponseDto
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class UserProductCouponResponseDto(
