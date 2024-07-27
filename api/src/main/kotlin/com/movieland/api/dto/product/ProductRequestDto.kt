@@ -22,6 +22,9 @@ data class CreateProductRequestDto(
     @field:NotNull(message = "상품 메인 이미지는 필수 값입니다.")
     @field:NotEmpty(message = "상품 메인 이미지는 적어도 하나는 첨부되어야 합니다.")
     val images: List<CreateProductImageRequestWithProductDto>,
+    @field:NotNull(message = "상품 메인 이미지는 필수 값입니다.")
+    @field:NotEmpty(message = "상품 메인 이미지는 적어도 하나는 첨부되어야 합니다.")
+    val detailImages: List<CreateProductImageRequestWithProductDto>,
     @field:NotNull(message = "상품 필수 옵션은 필수 값입니다.")
     @field:NotEmpty(message = "상품 필수 옵션은 최소 1개 이상 등록해야합니다.")
     val requiredOptions: List<CreateProductOptionRequestWithProductDto>,
@@ -35,6 +38,7 @@ data class UpdateProductRequestDto(
     val name: String?,
     val status: ProductStatusType?,
     val images: List<UpdateProductImageRequestWithProductDto>?,
+    val detailImages: List<UpdateProductImageRequestWithProductDto>?,
     @field:NotNull(message = "update_mask는 필수 값입니다.")
     @field:NotEmpty(message = "update_mask가 빈 배열입니다.")
     val updateMask: List<ProductUpdateMask>
