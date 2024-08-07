@@ -1,4 +1,4 @@
-package com.movieland.api.service.product.updater
+package com.movieland.api.service.product.updater.coupon
 
 import com.movieland.api.dto.product.coupon.UpdateProductCouponRequestDto
 import com.movieland.domain.entity.product.coupon.ProductCoupon

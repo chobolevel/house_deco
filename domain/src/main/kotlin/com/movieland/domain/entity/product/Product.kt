@@ -73,14 +73,6 @@ class Product(
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     val coupons = mutableListOf<ProductCoupon>()
 
-    fun getRequiredOptions(): List<ProductOption> {
-        return this.options.filter { it.type == ProductOptionType.REQUIRED }
-    }
-
-    fun getOptionalOptions(): List<ProductOption> {
-        return this.options.filter { it.type == ProductOptionType.OPTIONAL }
-    }
-
     fun setBy(productCategory: ProductCategory) {
         if (this.productCategory != productCategory) {
             this.productCategory = productCategory
@@ -103,6 +95,12 @@ class Product(
         }
     }
 
+    fun addCoupon(productCoupon: ProductCoupon) {
+        if (this.coupons.contains(productCoupon).not()) {
+            this.coupons.add(productCoupon)
+        }
+    }
+
     fun getMainImages(): List<ProductImage> {
         return this.images.filter { it.type != ProductImageType.DETAIL }
     }
@@ -111,18 +109,20 @@ class Product(
         return this.images.filter { it.type == ProductImageType.DETAIL }
     }
 
+    fun getRequiredOptions(): List<ProductOption> {
+        return this.options.filter { it.type == ProductOptionType.REQUIRED }
+    }
+
+    fun getOptionalOptions(): List<ProductOption> {
+        return this.options.filter { it.type == ProductOptionType.OPTIONAL }
+    }
+
     fun deleteMainImages() {
         this.images.filter { it.type != ProductImageType.DETAIL }.forEach { it.deleted = true }
     }
 
     fun deleteDetailImages() {
         this.images.filter { it.type == ProductImageType.DETAIL }.forEach { it.deleted = true }
-    }
-
-    fun addCoupon(productCoupon: ProductCoupon) {
-        if (this.coupons.contains(productCoupon).not()) {
-            this.coupons.add(productCoupon)
-        }
     }
 }
 

@@ -3,7 +3,7 @@ package com.movieland.api.service.product
 import com.movieland.api.dto.product.coupon.CreateProductCouponRequestDto
 import com.movieland.api.dto.product.coupon.UpdateProductCouponRequestDto
 import com.movieland.api.service.product.converter.ProductCouponConverter
-import com.movieland.api.service.product.updater.ProductCouponUpdatable
+import com.movieland.api.service.product.updater.coupon.ProductCouponUpdatable
 import com.movieland.api.service.product.validator.coupon.CreateProductCouponValidatable
 import com.movieland.api.service.product.validator.coupon.UpdateProductCouponValidatable
 import com.movieland.domain.entity.product.ProductFinder

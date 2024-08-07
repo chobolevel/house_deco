@@ -7,8 +7,11 @@ import com.movieland.api.dto.user.CreateUserRequestDto
 import com.movieland.api.dto.user.LoginRequestDto
 import com.movieland.api.dto.user.ReissueRequestDto
 import com.movieland.api.dto.user.UpdateUserRequestDto
+import com.movieland.api.service.product.ProductReviewService
+import com.movieland.api.service.product.query.ProductReviewQueryCreator
 import com.movieland.api.service.user.UserQueryCreator
 import com.movieland.api.service.user.UserService
+import com.movieland.domain.entity.product.review.ProductReviewOrderType
 import com.movieland.domain.entity.user.UserOrderType
 import com.movieland.domain.getUserId
 import io.swagger.v3.oas.annotations.Operation
@@ -31,7 +34,9 @@ import java.security.Principal
 @RequestMapping("/api/v1")
 class UserController(
     private val userService: UserService,
-    private val userQueryCreator: UserQueryCreator
+    private val userQueryCreator: UserQueryCreator,
+    private val productReviewService: ProductReviewService,
+    private val productReviewQueryCreator: ProductReviewQueryCreator,
 ) {
 
     @Operation(summary = "유저 회원 가입 API")
@@ -89,11 +94,27 @@ class UserController(
         return ResponseEntity.ok(ResultResponse(result))
     }
 
+    @HasAuthorityUser
     @Operation(summary = "유저 본인 프로필 조회 API")
     @GetMapping("/users/me")
-    @HasAuthorityUser
     fun me(principal: Principal): ResponseEntity<ResultResponse> {
         val result = userService.fetchUser(principal.getUserId())
+        return ResponseEntity.ok(ResultResponse(result))
+    }
+
+    @HasAuthorityUser
+    @Operation(summary = "유저 본인 상품 후기 목록 조회")
+    @GetMapping("/users/my/products/reviews")
+    fun searchMyProductReviewList(
+        principal: Principal,
+        @RequestParam(required = false) productId: Long?,
+        @RequestParam(required = false) skipCount: Long?,
+        @RequestParam(required = false) limitCount: Long?,
+        @RequestParam(required = false) orderTypes: List<ProductReviewOrderType>?
+    ): ResponseEntity<ResultResponse> {
+        val queryFilter = productReviewQueryCreator.createQueryFilter(principal.getUserId(), productId)
+        val pagination = productReviewQueryCreator.createPaginationFilter(skipCount, limitCount)
+        val result = productReviewService.searchProductReviewList(queryFilter, pagination, orderTypes)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
