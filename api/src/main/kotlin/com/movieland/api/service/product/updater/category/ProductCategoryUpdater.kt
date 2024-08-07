@@ -1,4 +1,4 @@
-package com.movieland.api.service.product.updater
+package com.movieland.api.service.product.updater.category
 
 import com.movieland.api.dto.product.category.UpdateProductCategoryRequestDto
 import com.movieland.domain.entity.product.category.ProductCategory
