@@ -37,7 +37,8 @@ class ProductReviewController(
     fun createProductReview(
         principal: Principal,
         @PathVariable productId: Long,
-        @Valid @RequestBody request: CreateProductReviewRequestDto
+        @Valid @RequestBody
+        request: CreateProductReviewRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.createProductReview(principal.getUserId(), productId, request)
         return ResponseEntity.ok(ResultResponse(result))
@@ -77,7 +78,8 @@ class ProductReviewController(
         principal: Principal,
         @PathVariable productId: Long,
         @PathVariable productReviewId: Long,
-        @Valid @RequestBody request: UpdateProductReviewRequestDto
+        @Valid @RequestBody
+        request: UpdateProductReviewRequestDto
     ): ResponseEntity<ResultResponse> {
         val result = service.updateProductReview(principal.getUserId(), productId, productReviewId, request)
         return ResponseEntity.ok(ResultResponse(result))
