@@ -5,7 +5,7 @@ import com.movieland.api.dto.product.category.CreateProductCategoryRequestDto
 import com.movieland.api.dto.product.category.ProductCategoryResponseDto
 import com.movieland.api.dto.product.category.UpdateProductCategoryRequestDto
 import com.movieland.api.service.product.converter.ProductCategoryConverter
-import com.movieland.api.service.product.updater.ProductCategoryUpdatable
+import com.movieland.api.service.product.updater.category.ProductCategoryUpdatable
 import com.movieland.api.service.product.validator.category.ProductCategoryUpdateValidatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.category.ProductCategoryFinder
