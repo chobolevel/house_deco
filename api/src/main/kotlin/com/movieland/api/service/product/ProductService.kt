@@ -6,6 +6,7 @@ import com.movieland.api.dto.product.ProductResponseDto
 import com.movieland.api.dto.product.UpdateProductRequestDto
 import com.movieland.api.service.product.converter.ProductConverter
 import com.movieland.api.service.product.updater.ProductUpdatable
+import com.movieland.api.service.product.validator.CreateProductValidatable
 import com.movieland.api.service.product.validator.ProductUpdateValidatable
 import com.movieland.domain.Pagination
 import com.movieland.domain.entity.product.ProductFinder
@@ -20,12 +21,14 @@ class ProductService(
     private val repository: ProductRepository,
     private val finder: ProductFinder,
     private val converter: ProductConverter,
+    private val createValidators: List<CreateProductValidatable>,
     private val updateValidators: List<ProductUpdateValidatable>,
     private val updaters: List<ProductUpdatable>
 ) {
 
     @Transactional
     fun createProduct(request: CreateProductRequestDto): Long {
+        createValidators.forEach { it.validate(request) }
         val product = converter.convert(request)
         return repository.save(product).id!!
     }

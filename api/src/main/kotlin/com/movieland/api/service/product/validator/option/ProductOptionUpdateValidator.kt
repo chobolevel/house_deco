@@ -14,7 +14,7 @@ class ProductOptionUpdateValidator : ProductOptionUpdateValidatable {
                 ProductOptionUpdateMask.NAME -> {
                     if (request.name.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_OPTION_NAME,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "유효하지 않은 상품 옵션명입니다."
                         )
                     }
@@ -23,7 +23,7 @@ class ProductOptionUpdateValidator : ProductOptionUpdateValidatable {
                 ProductOptionUpdateMask.ORIGINAL_PRICE -> {
                     if (request.originalPrice == null || request.originalPrice < 100) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_OPTION_ORIGINAL_PRICE,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "상품 옵션 원가가 유효하지 않거나 최소 100원 이상이어야 합니다."
                         )
                     }
@@ -32,7 +32,7 @@ class ProductOptionUpdateValidator : ProductOptionUpdateValidatable {
                 ProductOptionUpdateMask.SALE_PRICE -> {
                     if (request.salePrice == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_OPTION_SALE_PRICE,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "상품 옵션 판매가가 유효하지 않습니다. "
                         )
                     }
@@ -41,7 +41,7 @@ class ProductOptionUpdateValidator : ProductOptionUpdateValidatable {
                 ProductOptionUpdateMask.STOCK -> {
                     if (request.stock == null || request.stock < 1) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_OPTION_STOCK,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "상품 옵션 재고 수량이 유효하지 않거나 최소 1개 이상이어야 합니다."
                         )
                     }
@@ -50,7 +50,7 @@ class ProductOptionUpdateValidator : ProductOptionUpdateValidatable {
                 ProductOptionUpdateMask.ORDER -> {
                     if (request.order == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.INVALID_PRODUCT_OPTION_ORDER,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "상품 옵션 노출 순서가 유효하지 않습니다."
                         )
                     }

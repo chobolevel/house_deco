@@ -5,6 +5,7 @@ import com.movieland.domain.entity.brand.Brand
 import com.movieland.domain.entity.product.category.ProductCategory
 import com.movieland.domain.entity.product.coupon.ProductCoupon
 import com.movieland.domain.entity.product.image.ProductImage
+import com.movieland.domain.entity.product.image.ProductImageType
 import com.movieland.domain.entity.product.option.ProductOption
 import com.movieland.domain.entity.product.option.ProductOptionType
 import jakarta.persistence.CascadeType
@@ -72,14 +73,6 @@ class Product(
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     val coupons = mutableListOf<ProductCoupon>()
 
-    fun getRequiredOptions(): List<ProductOption> {
-        return this.options.filter { it.type == ProductOptionType.REQUIRED }
-    }
-
-    fun getOptionalOptions(): List<ProductOption> {
-        return this.options.filter { it.type == ProductOptionType.OPTIONAL }
-    }
-
     fun setBy(productCategory: ProductCategory) {
         if (this.productCategory != productCategory) {
             this.productCategory = productCategory
@@ -102,14 +95,34 @@ class Product(
         }
     }
 
-    fun deleteAllImages() {
-        this.images.forEach { it.deleted = true }
-    }
-
     fun addCoupon(productCoupon: ProductCoupon) {
         if (this.coupons.contains(productCoupon).not()) {
             this.coupons.add(productCoupon)
         }
+    }
+
+    fun getMainImages(): List<ProductImage> {
+        return this.images.filter { it.type != ProductImageType.DETAIL }
+    }
+
+    fun getDetailImages(): List<ProductImage> {
+        return this.images.filter { it.type == ProductImageType.DETAIL }
+    }
+
+    fun getRequiredOptions(): List<ProductOption> {
+        return this.options.filter { it.type == ProductOptionType.REQUIRED }
+    }
+
+    fun getOptionalOptions(): List<ProductOption> {
+        return this.options.filter { it.type == ProductOptionType.OPTIONAL }
+    }
+
+    fun deleteMainImages() {
+        this.images.filter { it.type != ProductImageType.DETAIL }.forEach { it.deleted = true }
+    }
+
+    fun deleteDetailImages() {
+        this.images.filter { it.type == ProductImageType.DETAIL }.forEach { it.deleted = true }
     }
 }
 
@@ -138,5 +151,6 @@ enum class ProductUpdateMask {
     NAME,
     STATUS,
     PRIORITY,
-    IMAGES
+    IMAGES,
+    DETAIL_IMAGES
 }

@@ -35,7 +35,7 @@ class UserService(
     private val updateValidators: List<UpdateUserValidatable>,
     private val authenticationManager: UserAuthenticationManager,
     private val userConverter: UserConverter,
-    private val userUpdaters: MutableList<out UserUpdatable>,
+    private val userUpdaters: List<UserUpdatable>,
     private val tokenProvider: TokenProvider,
     private val refreshTokenService: RefreshTokenService
 ) {

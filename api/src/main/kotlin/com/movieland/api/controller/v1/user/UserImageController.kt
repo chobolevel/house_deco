@@ -5,6 +5,7 @@ import com.movieland.api.dto.common.ResultResponse
 import com.movieland.api.dto.user.image.CreateUserProfileImageRequestDto
 import com.movieland.api.dto.user.image.UpdateUserProfileImageRequestDto
 import com.movieland.api.service.user.UserImageService
+import com.movieland.domain.getUserId
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
@@ -34,7 +35,7 @@ class UserImageController(
         @RequestBody
         request: CreateUserProfileImageRequestDto
     ): ResponseEntity<ResultResponse> {
-        val result = service.createUserProfileImage(principal.name.toLong(), request)
+        val result = service.createUserProfileImage(principal.getUserId(), request)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
@@ -48,7 +49,7 @@ class UserImageController(
         @RequestBody
         request: UpdateUserProfileImageRequestDto
     ): ResponseEntity<ResultResponse> {
-        val result = service.updateUserProfileImage(id, principal.name.toLong(), request)
+        val result = service.updateUserProfileImage(id, principal.getUserId(), request)
         return ResponseEntity.ok(ResultResponse(result))
     }
 
@@ -56,7 +57,7 @@ class UserImageController(
     @Operation(summary = "유저 프로필 이미지 삭제 API")
     @DeleteMapping("/profile-image/{id}")
     fun deleteUserProfileImage(@PathVariable id: Long, principal: Principal): ResponseEntity<ResultResponse> {
-        val result = service.deleteUserProfileImage(id, principal.name.toLong())
+        val result = service.deleteUserProfileImage(id, principal.getUserId())
         return ResponseEntity.ok(ResultResponse(result))
     }
 }

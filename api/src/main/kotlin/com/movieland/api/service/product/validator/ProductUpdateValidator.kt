@@ -15,7 +15,7 @@ class ProductUpdateValidator : ProductUpdateValidatable {
                 ProductUpdateMask.CATEGORY -> {
                     if (request.productCategoryId == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.PRODUCT_CATEGORY_ID_IS_NULL,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 상품 카테고리 ID가 누락되었습니다."
                         )
                     }
@@ -24,7 +24,7 @@ class ProductUpdateValidator : ProductUpdateValidatable {
                 ProductUpdateMask.BRAND -> {
                     if (request.brandId == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.BRAND_ID_IS_NULL,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 브랜드 ID가 누락되었습니다."
                         )
                     }
@@ -33,7 +33,7 @@ class ProductUpdateValidator : ProductUpdateValidatable {
                 ProductUpdateMask.NAME -> {
                     if (request.name.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.PRODUCT_NAME_IS_NULL,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 상품 이름이 누락되었습니다."
                         )
                     }
@@ -42,7 +42,7 @@ class ProductUpdateValidator : ProductUpdateValidatable {
                 ProductUpdateMask.STATUS -> {
                     if (request.status == null) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.PRODUCT_STATUS_IS_NULL,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 상품 상태 정보가 누락되었습니다."
                         )
                     }
@@ -51,8 +51,17 @@ class ProductUpdateValidator : ProductUpdateValidatable {
                 ProductUpdateMask.IMAGES -> {
                     if (request.images.isNullOrEmpty()) {
                         throw ParameterInvalidException(
-                            errorCode = ErrorCode.PRODUCT_IMAGES_ARE_EMPTY,
+                            errorCode = ErrorCode.INVALID_PARAMETER,
                             message = "변경할 이미지가 없습니다."
+                        )
+                    }
+                }
+
+                ProductUpdateMask.DETAIL_IMAGES -> {
+                    if (request.detailImages.isNullOrEmpty()) {
+                        throw ParameterInvalidException(
+                            errorCode = ErrorCode.INVALID_PARAMETER,
+                            message = "변경할 상세 이미지가 없습니다."
                         )
                     }
                 }

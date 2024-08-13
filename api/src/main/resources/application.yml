@@ -44,7 +44,7 @@ redis:
   port: 6379
 
 jwt:
-  issuer: "movie land"
+  issuer: "house_deco"
   secret-key: "chobolevel"
 
 cloud:
